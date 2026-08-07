@@ -1,0 +1,209 @@
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+    flex: 1;
+}
+
+.dashboard-view {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+
+/* Sidebar */
+aside {
+    width: 240px;
+    background: #1E293B;
+    color: white;
+    padding: 20px;
+}
+
+/* Navbar */
+header {
+    height: 70px;
+    background: #F8FAFC;
+    border-bottom: 1px solid #E2E8F0;
+
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* Main Content */
+main {
+
+    flex: 1;
+
+    background: #F1F5F9;
+
+    padding: 20px;
+
+    overflow-y: auto;
+
+    min-height: 0;
+
+    overflow-y: auto;
+
+    min-height: 0;
+
+}
+
+/* ---------- Sidebar ---------- */
+
+aside {
+    width: 250px;
+    background-color: #1E293B;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 20px;
+}
+
+aside h2 {
+    margin-bottom: 40px;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px 16px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.sidebar-item:hover {
+    background: #f3f4f6;
+}
+
+.sidebar-item.active {
+    background: #2563eb;
+    color: white;
+}
+
+aside h2 {
+
+    font-size: 28px;
+
+    margin-bottom: 40px;
+
+}
+
+
+/* ---------- Top Navbar ---------- */
+
+.top-navbar {
+
+    height: 70px;
+
+    background-color: white;
+
+    border-bottom: 1px solid #E2E8F0;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 0 25px;
+
+}
+
+.top-navbar {
+
+    display: flex;
+
+    justify-content: space-between;
+
+}
+
+.navbar-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+}
+
+.search-box {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    background-color: #F1F5F9;
+
+    padding: 10px 15px;
+
+    border-radius: 10px;
+
+    width: 320px;
+
+}
+
+.search-box input {
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    width: 100%;
+
+    font-size: 16px;
+
+}
+
+.navbar-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+}
+
+.navbar-icon {
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    color: #475569;
+
+}
+
+.user-profile {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    cursor: pointer;
+
+}
+
+.user-icon {
+
+    font-size: 34px;
+
+    color: #3B82F6;
+
+}

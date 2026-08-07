@@ -1,0 +1,176 @@
+.profile-page {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    padding: 28px;
+}
+
+/* ===========================
+   Profile Card
+=========================== */
+
+.profile-card {
+    background: #252A41;
+
+    border-radius: 18px;
+
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 10px;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .18);
+}
+
+.profile-avatar {
+    width: 90px;
+    height: 90px;
+
+    border-radius: 50%;
+
+    background: #3B82F6;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 42px;
+}
+
+.profile-card h2 {
+    color: white;
+
+    font-size: 28px;
+
+    margin: 0;
+}
+
+.profile-level {
+    color: #9CA3AF;
+
+    font-size: 16px;
+}
+
+/* ===========================
+   Sections
+=========================== */
+
+.profile-section {
+    background: #1E1E2F;
+
+    border-radius: 18px;
+
+    padding: 24px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .18);
+}
+
+.profile-section h3 {
+    color: white;
+
+    margin: 0;
+
+    font-size: 22px;
+}
+
+.profile-section p {
+    color: #D1D5DB;
+
+    line-height: 1.7;
+
+    margin: 0;
+}
+
+/* ===========================
+   Interests
+=========================== */
+
+.interest-container {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 12px;
+}
+
+.interest-tag {
+    background: #3B82F6;
+
+    color: white;
+
+    padding: 10px 18px;
+
+    border-radius: 999px;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    transition: .25s;
+}
+
+.interest-tag:hover {
+    background: #2563EB;
+
+    transform: translateY(-2px);
+}
+
+.section-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+.verified {
+
+    color: #22C55E;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+}
+
+
+
+.edit-profile-btn {
+
+    margin-top: 12px;
+
+    background: transparent;
+
+    color: #3B82F6;
+
+    border: 1px solid #3B82F6;
+
+    padding: 10px 18px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition: .25s;
+
+}
+
+
+.edit-profile-btn:hover {
+
+    background: #3B82F6;
+
+    color: white;
+
+}
