@@ -8,6 +8,11 @@ async function createUser(userData) {
 
 }
 
+const getUserProfile = async (learnerId) => {
+    return await UserProfile.findOne({ learnerId });
+};
+
 module.exports = {
-    createUser
+    createUser,
+    getUserProfile
 };
