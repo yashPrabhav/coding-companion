@@ -6,6 +6,7 @@ app.use(express.json());
 
 const userRoutes = require("./routes/userRoutes");
 const learnerRoutes = require("./routes/learnerRoutes");
+const learningEventRoutes = require("./routes/learningEventRoutes");
 
 app.get("/", (req, res) => {
     res.send("Coding Companion Backend is Running 🚀");
@@ -13,5 +14,6 @@ app.get("/", (req, res) => {
 
 app.use("/users", userRoutes);
 app.use("/learner-state", learnerRoutes);
+app.use("/learning-events", learningEventRoutes);
 
 module.exports = app;
