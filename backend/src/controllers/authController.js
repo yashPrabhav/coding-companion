@@ -41,8 +41,50 @@ const login = async (req, res) => {
     }
 };
 
+const forgotPassword = async (req, res) => {
+    try {
+        const result = await authService.forgotPassword(req.body);
+
+        if (!result.success) {
+            return res.status(400).json(result);
+        }
+
+        return res.status(200).json(result);
+
+    } catch (error) {
+        console.error("Forgot password error:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Something went wrong while processing the password reset request."
+        });
+    }
+};
+
+const resetPassword = async (req, res) => {
+    try {
+        const result = await authService.resetPassword(req.body);
+
+        if (!result.success) {
+            return res.status(400).json(result);
+        }
+
+        return res.status(200).json(result);
+
+    } catch (error) {
+        console.error("Reset password error:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Something went wrong while resetting the password."
+        });
+    }
+};
+
 
 module.exports = {
     signup,
-    login
+    login,
+    forgotPassword,
+    resetPassword
 };

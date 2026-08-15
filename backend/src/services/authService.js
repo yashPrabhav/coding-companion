@@ -1,3 +1,4 @@
+const crypto = require("crypto");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
@@ -152,8 +153,141 @@ const login = async ({ email, password }) => {
     };
 };
 
+const forgotPassword = async ({ email }) => {
+
+    // 1. Validate email
+
+    if (!email) {
+        return {
+            success: false,
+            message: "Email is required."
+        };
+    }
+
+    // 2. Normalize email
+
+    const normalizedEmail = email.trim().toLowerCase();
+
+    // 3. Find the user
+
+    const user = await User.findOne({
+        email: normalizedEmail
+    });
+
+    // 4. Don't reveal whether the account exists
+
+    if (!user) {
+        return {
+            success: true,
+            message: "If an account with this email exists, a password reset link has been sent."
+        };
+    }
+
+    // 5. Generate a secure random token
+
+    const resetToken = crypto.randomBytes(32).toString("hex");
+
+    // 6. Hash the token before storing it
+
+    const resetTokenHash = crypto
+        .createHash("sha256")
+        .update(resetToken)
+        .digest("hex");
+
+    // 7. Set token expiry to 15 minutes
+
+    const resetTokenExpires = new Date(
+        Date.now() + 15 * 60 * 1000
+    );
+
+    // 8. Store the hashed token and expiry
+
+    user.passwordResetToken = resetTokenHash;
+    user.passwordResetExpires = resetTokenExpires;
+
+    await user.save();
+
+    // 9. Create the reset link
+
+    const resetLink = `http://localhost:5173/reset-password?token=${resetToken}`;
+
+    return {
+        success: true,
+        message: "If an account with this email exists, a password reset link has been sent.",
+        resetLink
+    };
+};
+
+const resetPassword = async ({ token, newPassword }) => {
+
+    // 1. Validate required fields
+
+    if (!token || !newPassword) {
+        return {
+            success: false,
+            message: "Reset token and new password are required."
+        };
+    }
+
+    // 2. Hash the token received from the reset link
+
+    const resetTokenHash = crypto
+        .createHash("sha256")
+        .update(token)
+        .digest("hex");
+
+    // 3. Find the user with this token
+
+    const user = await User.findOne({
+        passwordResetToken: resetTokenHash
+    });
+
+    if (!user) {
+        return {
+            success: false,
+            message: "Invalid or expired password reset token."
+        };
+    }
+
+    // 4. Check whether the token has expired
+
+    if (
+        !user.passwordResetExpires ||
+        user.passwordResetExpires < new Date()
+    ) {
+        return {
+            success: false,
+            message: "Invalid or expired password reset token."
+        };
+    }
+
+    // 5. Hash the new password
+
+    const newPasswordHash = await bcrypt.hash(
+        newPassword,
+        10
+    );
+
+    // 6. Update the password
+
+    user.passwordHash = newPasswordHash;
+
+    // 7. Invalidate the reset token
+
+    user.passwordResetToken = null;
+    user.passwordResetExpires = null;
+
+    await user.save();
+
+    return {
+        success: true,
+        message: "Password reset successfully."
+    };
+};
 
 module.exports = {
     signup,
-    login
+    login,
+    forgotPassword,
+    resetPassword
 };
