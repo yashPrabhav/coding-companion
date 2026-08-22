@@ -1,86 +1,63 @@
-# Coding Companion Frontend
+# Coding Companion Frontend — Structured MVP
 
-The frontend is responsible for providing the user interface of Coding Companion.
+This replaces the old dashboard-style frontend UI with a componentized implementation based on the locked frontend research.
 
-It focuses on delivering a clean, interactive, and personalized learning experience while communicating with the backend through REST APIs.
+## Structure
 
----
-
-# Tech Stack
-
-- React
-- Vite
-- JavaScript
-- CSS
-
----
-
-# Current Features
-
-- Landing Page
-- Authentication
-- Dashboard
-- Personalized Roadmap
-- Progress Tracking
-- User Profile
-- Settings
-- AI Chat Interface
-
----
-
-# Folder Structure
-
-```
-frontend
-
-├── public/
-├── src/
-│
-├── assets/
-├── components/
-├── pages/
-├── styles/
-│
-└── App.jsx
+```text
+src/
+├── App.jsx
+├── App.css
+├── index.css
+├── data/
+│   └── demoConversations.js
+├── hooks/
+│   └── useCompanionState.js
+└── components/
+    └── companion/
+        ├── CompanionShell.jsx
+        ├── TopBar.jsx
+        ├── ConversationList.jsx
+        ├── ConversationPane.jsx
+        ├── Composer.jsx
+        ├── CodeStream.jsx
+        ├── CodeWorkspace.jsx
+        ├── CodeView.jsx
+        ├── SettingsModal.jsx
+        ├── UndoToast.jsx
+        └── Icons.jsx
 ```
 
----
+## Why this structure
 
-# Responsibilities
+- `CompanionShell` owns page-level composition.
+- `useCompanionState` owns MVP conversation/UI state.
+- Each major UI surface has its own component.
+- `CodeView` is shared by the code stream, attached code, and editor.
+- Visual rules remain centralized in `App.css` and `index.css`.
+- Demo data is isolated from UI.
+- This keeps the frontend easy to replace piece-by-piece when real backend/LLM services are connected.
 
-The frontend is responsible for:
-
-- Rendering the UI
-- Collecting user input
-- Displaying AI responses
-- Managing client-side navigation
-- Communicating with the backend APIs
-
-The frontend does **not** contain business logic or AI decision-making.
-
----
-
-# Future Features
-
-- Real-time AI chat
-- Interactive code editor
-- Progress visualization
-- Roadmap visualization
-- Dark mode
-- Notifications
-- Mobile responsiveness
-
----
-
-# Run Locally
+## Run
 
 ```bash
 npm install
 npm run dev
 ```
 
----
+## Build
 
-## Author
+```bash
+npm run build
+```
 
-Developed by **Yash Prabhav Suman**
+## Deliberately not included yet
+
+- Real LLM integration
+- Authentication wiring
+- Database persistence
+- Production memory system
+- Code execution
+- Full IDE functionality
+- Production syntax highlighting
+- Real server-side progressive history

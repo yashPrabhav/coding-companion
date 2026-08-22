@@ -1,19 +1,16 @@
 import { useState } from "react";
-import DashboardPage from "./pages/DashboardPage";
+import "./App.css";
+import CompanionShell from "./components/companion/CompanionShell";
 
 function App() {
-
-  const [activePage, setActivePage] = useState("dashboard");
+  const [activePage, setActivePage] = useState("companion");
 
   return (
-
-    <DashboardPage
+    <CompanionShell
       activePage={activePage}
       setActivePage={setActivePage}
     />
-
   );
-
 }
 
 export default App;
