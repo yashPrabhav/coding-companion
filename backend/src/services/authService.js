@@ -117,6 +117,7 @@ const login = async ({ email, password }) => {
         email: normalizedEmail
     });
 
+
     if (!user) {
         return {
             success: false,
@@ -130,6 +131,7 @@ const login = async ({ email, password }) => {
         password,
         user.passwordHash
     );
+
 
     if (!passwordMatches) {
         return {

@@ -22,8 +22,10 @@ const signup = async (req, res) => {
 
 
 const login = async (req, res) => {
+
     try {
         const result = await authService.login(req.body);
+
 
         if (!result.success) {
             return res.status(401).json(result);
