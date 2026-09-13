@@ -83,10 +83,10 @@ async function test() {
         const result =
             await persistTeachingBrainOutput({
                 learnerId:
-                    "learner_1787493415632",
+                    "test-learner",
 
                 conversationId:
-                    "cc-test-all-persistence-2026",
+                    "test-conversation",
 
                 teachingBrainOutput
             });
