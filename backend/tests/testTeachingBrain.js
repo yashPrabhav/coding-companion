@@ -11,7 +11,7 @@ const {
 async function test() {
     try {
         const context = await buildContext({
-            learnerId: "learner_1787493415632",
+            learnerId: "test-learner",
 
             conversation: [
                 {
