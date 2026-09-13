@@ -1,6 +1,8 @@
-# Coding Companion Frontend — Structured MVP
+# Coding Companion Frontend
 
-This replaces the old dashboard-style frontend UI with a componentized implementation based on the locked frontend research.
+The frontend is the user-facing interface for Coding Companion.
+
+It provides the companion workspace, conversation interface, code stream, code workspace, and related UI components.
 
 ## Structure
 
@@ -28,17 +30,18 @@ src/
         └── Icons.jsx
 ```
 
-## Why this structure
+## Architecture
 
-- `CompanionShell` owns page-level composition.
-- `useCompanionState` owns MVP conversation/UI state.
-- Each major UI surface has its own component.
-- `CodeView` is shared by the code stream, attached code, and editor.
-- Visual rules remain centralized in `App.css` and `index.css`.
-- Demo data is isolated from UI.
-- This keeps the frontend easy to replace piece-by-piece when real backend/LLM services are connected.
+- `CompanionShell` handles page-level composition.
+- `useCompanionState` manages frontend conversation and UI state.
+- Major UI surfaces are separated into reusable components.
+- `CodeView` is shared by code-related surfaces.
+- Visual rules are centralized in `App.css` and `index.css`.
+- Demo data is isolated from the UI components.
 
-## Run
+The frontend is currently being developed alongside the backend and is not yet a production-ready application.
+
+## Run Locally
 
 ```bash
 npm install
@@ -51,13 +54,16 @@ npm run dev
 npm run build
 ```
 
-## Deliberately not included yet
+## Current Scope
 
-- Real LLM integration
-- Authentication wiring
-- Database persistence
-- Production memory system
-- Code execution
-- Full IDE functionality
-- Production syntax highlighting
-- Real server-side progressive history
+The frontend currently focuses on the companion interface and its core coding workspace experience.
+
+Backend integration, authentication, persistent learner data, and AI-powered behavior are being developed separately.
+
+## Project Status
+
+This is an active work-in-progress project. The frontend structure and UI may change as Coding Companion is tested and connected to the backend.
+
+## Author
+
+Developed by **Yash Prabhav Suman**
