@@ -1,108 +1,78 @@
 # Coding Companion
 
-> An AI-powered personalized programming learning companion that adapts to every learner's progress, understanding, and learning style.
+> An AI-powered programming learning companion built to maintain learner context and personalize teaching over time.
 
----
+Coding Companion is a work-in-progress project exploring how an AI coding companion can use a learner's profile, current state, learning events, and conversation context to provide more consistent guidance than a stateless chatbot.
 
-## Overview
+## Repository Structure
 
-Coding Companion is an AI-powered programming education platform that provides personalized learning experiences through adaptive roadmaps, persistent learner memory, and context-aware AI teaching.
-
-Unlike traditional AI chatbots that treat every conversation independently, Coding Companion continuously learns about each student and adapts its teaching according to their goals, progress, strengths, weaknesses, and preferred learning style.
-
-The objective is to build an AI mentor that grows with the learner throughout their programming journey.
-
----
-
-# Repository Structure
-
-```
-Coding Companion
-
-├── frontend/
-│   React + Vite application
-│
-├── backend/
-│   Express.js REST API
-│   MongoDB
-│   AI Services
-│
+```text
+coding-companion/
+├── frontend/    # React + Vite application
+├── backend/     # Express REST API, MongoDB, AI services
 └── README.md
 ```
 
----
+## Architecture
 
-# Architecture
-
-```
+```text
 Frontend (React)
         │
         ▼
 Backend (Express)
         │
-        ▼
-Teaching Services
-        │
         ├── User Profile
         ├── Learner State
         ├── Learning Events
-        └── Knowledge Graph
+        └── Teaching Brain
         │
         ▼
-MongoDB Atlas
+MongoDB
 ```
 
----
+The repository contains the implementation and experiments behind the project. Some parts are still under development and should not be considered production-ready.
 
-# Technology Stack
+## Technology Stack
 
-## Frontend
+- **Frontend:** React, Vite, JavaScript, CSS
+- **Backend:** Node.js, Express.js, Mongoose
+- **Database:** MongoDB Atlas
+- **AI:** Google Gemini API
 
-- React
-- Vite
-- JavaScript
-- CSS
+## Current Work
 
-## Backend
+- Frontend companion interface
+- User and learner data models
+- Learner-state and learning-event services
+- Context building for AI teaching
+- Structured Teaching Brain output
+- Persistence of learning observations and learner-state updates
 
-- Node.js
-- Express.js
-- Mongoose
+## Running Locally
 
-## Database
+### Backend
 
-- MongoDB Atlas
+```bash
+cd backend
+npm install
+npm run dev
+```
 
-## AI
+### Frontend
 
-- OpenAI API
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
----
+The backend requires environment variables for the database and AI service.
 
-# Development Progress
+**Do not commit your `.env` file or real credentials.**
 
-## Completed
+## Project Status
 
-- Frontend Foundation
-- Backend Foundation
-- MongoDB Integration
-- User Profile API
-- Service Layer Architecture
-
-## In Progress
-
-- Learner State
-- Learning Events
-- Prompt Builder
-- Teaching Engine
-
----
-
-# Vision
-
-Coding Companion aims to become an intelligent programming mentor that remembers every learner, adapts every explanation, and continuously improves the learning experience over time.
-
----
+Coding Companion is an active personal project. APIs, architecture, and the learning experience may change as the project is tested with real users.
 
 ## Author
 
