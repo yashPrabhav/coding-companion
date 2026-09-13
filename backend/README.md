@@ -12,6 +12,7 @@ It manages learner data, business logic, AI interactions, and persistent memory.
 - Express.js
 - MongoDB Atlas
 - Mongoose
+- Google Gemini API
 
 ---
 
@@ -166,13 +167,14 @@ npm run dev
 
 # Environment Variables
 
-```
+```env
 PORT=
-
 MONGODB_URI=
-
-OPENAI_API_KEY=
+GEMINI_API_KEY=
+TEACHING_BRAIN_MODEL=
 ```
+
+**Do not commit your `.env` file or real credentials.**
 
 ---
 
