@@ -1,9 +1,44 @@
 const LearningEvent = require("../models/LearningEvent");
+const LearningEventEmbedding = require("../models/LearningEventEmbedding");
+const {
+    generateObservationEmbedding,
+} = require("./embeddingService");
 
 const createLearningEvent = async (data) => {
-    const learningEvent = new LearningEvent(data);
+    if (!data?.event?.data?.observation) {
+        throw new Error(
+            "Learning event observation is required for embedding."
+        );
+    }
 
-    return await learningEvent.save();
+    const learningEvent = new LearningEvent(data);
+    const savedEvent = await learningEvent.save();
+
+    try {
+        const embeddingResult =
+            await generateObservationEmbedding(
+                savedEvent.event.data.observation
+            );
+
+        await LearningEventEmbedding.create({
+            eventId: savedEvent.metadata.eventId,
+            learnerId: savedEvent.metadata.learnerId,
+            model: embeddingResult.model,
+            dimensions: embeddingResult.dimensions,
+            embedding: embeddingResult.embedding,
+            createdAt: savedEvent.metadata.createdAt,
+        });
+    } catch (error) {
+        await LearningEvent.deleteOne({
+            "metadata.eventId": savedEvent.metadata.eventId,
+        });
+
+        throw new Error(
+            `Learning event embedding failed: ${error.message}`
+        );
+    }
+
+    return savedEvent;
 };
 
 const getLearningEventById = async (eventId) => {
