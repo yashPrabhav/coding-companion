@@ -1,16 +1,25 @@
 # Coding Companion Frontend
 
-The frontend is the user-facing interface for Coding Companion.
+The main Coding Companion frontend is a React + Vite application. It provides the visual companion workspace, conversation list and pane, message composer, Code Stream, code workspace/editor surfaces, and supporting UI interactions.
 
-It provides the companion workspace, conversation interface, code stream, code workspace, and related UI components.
+**Current status:** this is a frontend prototype, not yet a fully integrated AI product. The current conversation data is initialized from local demo data, and the assistant response is simulated in the frontend state hook. The interface is not yet using the backend's learner-aware Teaching Brain flow.
 
-## Structure
+## Tech stack
+
+- React 19
+- Vite
+- JavaScript (ES modules)
+- CSS
+- React Icons
+
+## Source structure
 
 ```text
 src/
 ├── App.jsx
 ├── App.css
 ├── index.css
+├── main.jsx
 ├── data/
 │   └── demoConversations.js
 ├── hooks/
@@ -30,40 +39,51 @@ src/
         └── Icons.jsx
 ```
 
-## Architecture
+## How it is organized
 
-- `CompanionShell` handles page-level composition.
-- `useCompanionState` manages frontend conversation and UI state.
-- Major UI surfaces are separated into reusable components.
-- `CodeView` is shared by code-related surfaces.
-- Visual rules are centralized in `App.css` and `index.css`.
-- Demo data is isolated from the UI components.
+- **`CompanionShell`:** composes the main workspace UI.
+- **`useCompanionState`:** owns local conversation state, selection/search, composer input, code entries, workspace state, simulated response state, and conversation actions.
+- **`ConversationList` and `ConversationPane`:** present conversation navigation and the active thread.
+- **`Composer`:** collects learner messages and optional code.
+- **`CodeStream`, `CodeWorkspace`, and `CodeView`:** display code shared in the conversation and support a separate workspace surface.
+- **`demoConversations.js`:** supplies local demo conversation data.
 
-The frontend is currently being developed alongside the backend and is not yet a production-ready application.
+Conversation state currently lives in React state; it is not persisted to the backend or a database. Switching conversations clears the independent workspace/attached-code state by design in the current hook.
 
-## Run Locally
+## Run locally
+
+From this directory:
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Build
+Vite will print the local URL, usually `http://localhost:5173`.
+
+## Build and lint
 
 ```bash
 npm run build
+npm run lint
 ```
 
-## Current Scope
+## Current scope and limitations
 
-The frontend currently focuses on the companion interface and its core coding workspace experience.
+- The interface and code-workspace interactions are under active development.
+- Conversation history is demo/local state and does not survive a full page reload.
+- Assistant replies are simulated with a frontend timer; they are not responses from Gemini or the backend.
+- Authentication screens/experiments live separately in the repository's `frontend_auth/` directory; they are not wired into this main frontend flow.
+- The backend already has learner models and AI services, but full frontend integration, persistent sessions, and the end-to-end learner-aware teaching pipeline remain future work.
+- The UI and component boundaries may change as the product is tested with users.
 
-Backend integration, authentication, persistent learner data, and AI-powered behavior are being developed separately.
+## Development direction
 
-## Project Status
-
-This is an active work-in-progress project. The frontend structure and UI may change as Coding Companion is tested and connected to the backend.
+1. Connect the frontend to backend endpoints with clear loading and error states.
+2. Replace simulated replies with the real teaching flow once its backend orchestration is ready.
+3. Add authenticated, persistent learner sessions.
+4. Test core conversation and code-workspace interactions across screen sizes and failure cases.
 
 ## Author
 
-Developed by **Yash Prabhav Suman**
+Developed by **Yash Prabhav Suman**.
