@@ -20,6 +20,7 @@ const learnerRoutes = require("./routes/learnerRoutes");
 const learningEventRoutes = require("./routes/learningEventRoutes");
 const updateRoutes = require("./routes/updateRoutes");
 const authRoutes = require("./routes/authRoutes");
+const chatRoutes = require("./routes/chatRoutes");
 
 app.get("/", (req, res) => {
     res.send("Coding Companion Backend is Running 🚀");
@@ -30,5 +31,6 @@ app.use("/learner-state", learnerRoutes);
 app.use("/learning-events", learningEventRoutes);
 app.use("/updates", updateRoutes);
 app.use("/auth", authRoutes);
+app.use("/chat", chatRoutes);
 
 module.exports = app;
