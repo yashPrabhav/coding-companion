@@ -121,13 +121,16 @@ export function useCompanionState() {
     setUndo(null);
   }
 
-  function sendMessage() {
+  async function sendMessage() {
     if (isResponding || (!composer.trim() && !attachedCode.trim())) return;
 
     const userText = composer.trim();
     const code = attachedCode.trim();
+    const messageText = code
+      ? `${userText || "Please help me understand this code."}\n\nAttached code:\n${code}`
+      : userText;
+    const conversationIdAtSend = activeId;
 
-    // Clear UI immediately.
     setComposer("");
     setAttachedCode("");
 
@@ -144,11 +147,7 @@ export function useCompanionState() {
         : activeConversation.title;
 
     const newStreamEntry = code
-      ? {
-        id: `stream-${Date.now()}`,
-        code,
-        source: "user"
-      }
+      ? { id: `stream-${Date.now()}`, code, source: "user" }
       : null;
 
     updateActiveConversation({
@@ -164,11 +163,7 @@ export function useCompanionState() {
     if (code) {
       setCodeStreamEntries((current) => [
         ...current,
-        {
-          id: `stream-${Date.now()}`,
-          code,
-          source: "user"
-        }
+        { id: `stream-${Date.now()}`, code, source: "user" }
       ]);
     }
 
@@ -176,35 +171,65 @@ export function useCompanionState() {
     setThinkingLong(false);
     setErrorId(null);
 
-    responseTimer.current = setTimeout(() => {
-      setThinkingLong(true);
-    }, 1200);
+    clearTimeout(responseTimer.current);
+    responseTimer.current = setTimeout(() => setThinkingLong(true), 1200);
 
-    setTimeout(() => {
-      const response = {
+    try {
+      const token = localStorage.getItem("cc_auth_token");
+      if (!token) {
+        throw new Error("You're not logged in. Please log in and try again.");
+      }
+
+      const history = [
+        ...(activeConversation.messages || []).map(({ role, text }) => ({
+          role: role === "cc" ? "assistant" : "user",
+          text
+        })),
+        { role: "user", text: messageText }
+      ];
+
+      const response = await fetch("http://localhost:3000/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          message: messageText,
+          conversation: history
+        })
+      });
+
+      const result = await response.json();
+      if (!response.ok || !result.success || typeof result.reply !== "string") {
+        throw new Error(result.message || "The backend could not generate a reply.");
+      }
+
+      const assistantMessage = {
         id: `cc-${Date.now()}`,
         role: "cc",
-        text: code
-          ? "I can work with that code. Let's look at what it is doing first, then we can decide what to improve."
-          : "Let's work through that together. I'll adapt the explanation to what you already know instead of jumping straight to a solution."
+        text: result.reply
       };
 
       setConversations((current) =>
         current.map((conversation) =>
-          conversation.id === activeId
+          conversation.id === conversationIdAtSend
             ? {
-              ...conversation,
-              messages: [...conversation.messages, response],
-              updated: "Just now"
-            }
+                ...conversation,
+                messages: [...conversation.messages, assistantMessage],
+                updated: "Just now"
+              }
             : conversation
         )
       );
-
+    } catch (error) {
+      console.error("Coding Companion chat failed:", error);
+      setErrorId(Date.now());
+    } finally {
+      clearTimeout(responseTimer.current);
       setIsResponding(false);
       setThinkingLong(false);
-      clearTimeout(responseTimer.current);
-    }, 2300);
+    }
   }
 
   return {
