@@ -120,6 +120,53 @@ const getLearningContext = async (req, res) => {
 };
 
 
+const retrieveRelevantLearningEvents = async (req, res) => {
+    try {
+        const { learnerId, query, limit } = req.body;
+
+        if (!learnerId || !query || typeof query !== "string") {
+            return res.status(400).json({
+                message: "learnerId and a valid query are required",
+            });
+        }
+
+        const parsedLimit = limit === undefined ? 5 : Number(limit);
+
+        if (
+            !Number.isInteger(parsedLimit) ||
+            parsedLimit < 1 ||
+            parsedLimit > 20
+        ) {
+            return res.status(400).json({
+                message: "limit must be an integer between 1 and 20",
+            });
+        }
+
+        const events =
+            await learningEventService.retrieveRelevantLearningEvents(
+                learnerId,
+                query.trim(),
+                parsedLimit
+            );
+
+        return res.status(200).json({
+            learnerId,
+            query,
+            eventCount: events.length,
+            events,
+        });
+    } catch (error) {
+        console.error("Error retrieving relevant learning events:", error);
+
+        return res.status(500).json({
+            message: "Failed to retrieve relevant learning events",
+            error: error.message,
+        });
+    }
+};
+
+
+
 
 module.exports = {
     createLearningEvent,
@@ -127,4 +174,5 @@ module.exports = {
     getLearningEventsByTags,
     getLearningEventsByLearner,
     getLearningContext,
+    retrieveRelevantLearningEvents,
 };

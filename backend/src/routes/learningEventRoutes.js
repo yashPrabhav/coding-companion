@@ -6,9 +6,11 @@ const {
     getLearningEventsByTags,
     getLearningEventsByLearner,
     getLearningContext,
+    retrieveRelevantLearningEvents,
 } = require("../controllers/learningEventController");
 
 const router = express.Router();
+
 
 // Create and store an immutable Learning Event
 router.post("/", createLearningEvent);
@@ -21,6 +23,10 @@ router.get("/learner/:learnerId", getLearningEventsByLearner);
 
 router.get("/tags", getLearningEventsByTags);
 
+// Permanent retrieval endpoint
+router.post("/retrieve", retrieveRelevantLearningEvents);
+
 router.get("/:eventId", getLearningEventById);
+
 
 module.exports = router;

@@ -38,6 +38,34 @@ async function generateObservationEmbedding(observation) {
     };
 }
 
+async function generateQueryEmbedding(query) {
+    if (!query || typeof query !== "string") {
+        throw new Error("A valid search query is required.");
+    }
+
+    if (!process.env.GEMINI_API_KEY) {
+        throw new Error("GEMINI_API_KEY is not configured.");
+    }
+
+    const response = await ai.models.embedContent({
+        model: MODEL,
+        contents: query,
+        config: {
+            taskType: "RETRIEVAL_QUERY",
+            outputDimensionality: OUTPUT_DIMENSIONALITY,
+        },
+    });
+
+    const values = response.embeddings?.[0]?.values;
+
+    if (!Array.isArray(values) || values.length === 0) {
+        throw new Error("Query embedding generation failed.");
+    }
+
+    return values;
+}
+
 module.exports = {
     generateObservationEmbedding,
+    generateQueryEmbedding,
 };
