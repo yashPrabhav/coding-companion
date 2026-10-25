@@ -1,6 +1,27 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { demoConversations } from "../data/demoConversations";
 
+function extractCodeBlocks(text) {
+  const codeBlocks = [];
+  const pattern = /```([a-zA-Z0-9_+#.-]*)\s*\n([\s\S]*?)```/g;
+
+  let match;
+  while ((match = pattern.exec(text)) !== null) {
+    const code = match[2].trim();
+
+    if (code) {
+      codeBlocks.push({
+        id: `assistant-stream-${Date.now()}-${codeBlocks.length}`,
+        code,
+        language: match[1] || "text",
+        source: "assistant"
+      });
+    }
+  }
+
+  return codeBlocks;
+}
+
 export function useCompanionState() {
   const [conversations, setConversations] = useState(demoConversations);
   const [activeId, setActiveId] = useState(1);
@@ -95,7 +116,8 @@ export function useCompanionState() {
           hasCode: false,
           updated: "Just now",
           messages: [],
-          code: ""
+          code: "",
+          codeStreamEntries: []
         }]);
         setActiveId(newId);
         setCodeOpen(false);
@@ -210,6 +232,7 @@ export function useCompanionState() {
         role: "cc",
         text: result.reply
       };
+      const generatedCodeEntries = extractCodeBlocks(result.reply);
 
       setConversations((current) =>
         current.map((conversation) =>
@@ -217,6 +240,12 @@ export function useCompanionState() {
             ? {
                 ...conversation,
                 messages: [...conversation.messages, assistantMessage],
+                codeStreamEntries: [
+                  ...(conversation.codeStreamEntries || []),
+                  ...generatedCodeEntries
+                ],
+                hasCode:
+                  conversation.hasCode || generatedCodeEntries.length > 0,
                 updated: "Just now"
               }
             : conversation
