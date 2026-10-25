@@ -1,4 +1,7 @@
 const teachingBrainPrompt = require("../prompt/teachingBrainV2");
+const {
+    retrieveRelevantLearningEvents,
+} = require("./learningEventService");
 
 const BASE_URL = `http://localhost:${process.env.PORT || 3000}`;
 
@@ -32,17 +35,10 @@ async function buildContext({
 
     const encodedLearnerId = encodeURIComponent(learnerId);
 
-    const tagsQuery =
-        learningEventTags.length > 0
-            ? `?tags=${encodeURIComponent(
-                learningEventTags.join(",")
-            )}`
-            : "";
-
     const [
         userProfileResponse,
         learnerStateResponse,
-        learningEventsResponse,
+        learningEvents,
     ] = await Promise.all([
         getJson(
             `${BASE_URL}/users/${encodedLearnerId}`
@@ -52,8 +48,9 @@ async function buildContext({
             `${BASE_URL}/learner-state/${encodedLearnerId}`
         ),
 
-        getJson(
-            `${BASE_URL}/learning-events/context/${encodedLearnerId}${tagsQuery}`
+        retrieveRelevantLearningEvents(
+            learnerId,
+            currentMessage
         ),
     ]);
 
@@ -64,7 +61,7 @@ async function buildContext({
 
         learnerState: learnerStateResponse,
 
-        learningEvents: learningEventsResponse.events || [],
+        learningEvents,
 
         conversation,
 
