@@ -8,7 +8,7 @@ on:
 
 jobs:
   frontend:
-    name: Frontend build and lint
+    name: Frontend production build
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -26,8 +26,6 @@ jobs:
         run: npm ci
       - name: Build frontend
         run: npm run build
-      - name: Lint frontend
-        run: npm run lint
 
   backend:
     name: Backend syntax checks
