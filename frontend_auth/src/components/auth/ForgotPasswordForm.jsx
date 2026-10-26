@@ -5,7 +5,6 @@ function ForgotPasswordForm() {
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
-    const [resetLink, setResetLink] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
     async function handleSubmit(event) {
@@ -13,7 +12,6 @@ function ForgotPasswordForm() {
 
         setMessage("");
         setError("");
-        setResetLink("");
 
         if (!email.trim()) {
             setError("Email is required.");
@@ -25,14 +23,8 @@ function ForgotPasswordForm() {
 
             const result = await forgotPassword(email.trim());
 
-            console.log("FORGOT PASSWORD RESULT:", result);
-
             setMessage(result.message);
 
-            // Development-only reset link.
-            if (result.resetLink) {
-                setResetLink(result.resetLink);
-            }
 
         } catch (error) {
             setError(error.message);
@@ -64,16 +56,6 @@ function ForgotPasswordForm() {
                 </p>
             )}
 
-            {resetLink && (
-                <button
-                    type="button"
-                    onClick={() => {
-                        window.location.href = resetLink;
-                    }}
-                >
-                    Open Reset Password
-                </button>
-            )}
 
             <button
                 type="submit"

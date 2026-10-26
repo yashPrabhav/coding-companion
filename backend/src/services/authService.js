@@ -5,6 +5,7 @@ const User = require("../models/User");
 
 const userService = require("./userService");
 const learnerService = require("./learnerService");
+const { sendPasswordResetEmail } = require("./emailService");
 
 
 const generateToken = (user) => {
@@ -211,12 +212,17 @@ const forgotPassword = async ({ email }) => {
 
     // 9. Create the reset link
 
-    const resetLink = `http://localhost:5173/reset-password?token=${resetToken}`;
+    const frontendAuthUrl = (process.env.FRONTEND_AUTH_URL || "http://localhost:5174").replace(/\/$/, "");
+    const resetLink = `${frontendAuthUrl}/reset-password?token=${resetToken}`;
+
+    await sendPasswordResetEmail({
+        to: normalizedEmail,
+        resetLink
+    });
 
     return {
         success: true,
-        message: "If an account with this email exists, a password reset link has been sent.",
-        resetLink
+        message: "If an account with this email exists, a password reset link has been sent."
     };
 };
 
