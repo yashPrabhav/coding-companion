@@ -36,6 +36,9 @@ export function useCompanionState() {
   const [isResponding, setIsResponding] = useState(false);
   const [thinkingLong, setThinkingLong] = useState(false);
   const [errorId, setErrorId] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [errorRetryable, setErrorRetryable] = useState(true);
+  const pendingRequestRef = useRef(null);
   const [undo, setUndo] = useState(null);
   const [showJump, setShowJump] = useState(false);
   const responseTimer = useRef(null);
@@ -91,11 +94,14 @@ export function useCompanionState() {
     setAttachedCode("");
     setCodeOpen(false);
     setErrorId(null);
+    setErrorMessage("");
+    pendingRequestRef.current = null;
   }
 
   function selectConversation(id) {
     setActiveId(id);
     setErrorId(null);
+    setErrorMessage("");
   }
 
   function deleteConversation(id) {
@@ -143,72 +149,111 @@ export function useCompanionState() {
     setUndo(null);
   }
 
-  async function sendMessage() {
-    if (isResponding || (!composer.trim() && !attachedCode.trim())) return;
+  async function sendMessage(isRetry = false) {
+    if (isResponding) return;
 
-    const userText = composer.trim();
-    const code = attachedCode.trim();
-    const messageText = code
-      ? `${userText || "Please help me understand this code."}\n\nAttached code:\n${code}`
-      : userText;
-    const conversationIdAtSend = activeId;
+    const pendingRequest = isRetry ? pendingRequestRef.current : null;
+    if (isRetry && !pendingRequest) return;
+    if (!isRetry && (!composer.trim() && !attachedCode.trim())) return;
 
-    setComposer("");
-    setAttachedCode("");
+    const conversationIdAtSend = isRetry ? pendingRequest.conversationId : activeId;
+    const conversationAtSend = conversations.find(
+      (conversation) => conversation.id === conversationIdAtSend
+    );
+    if (!conversationAtSend) return;
 
-    const userMessage = {
-      id: `user-${Date.now()}`,
-      role: "user",
-      text: userText,
-      code: code || null
-    };
+    const userText = isRetry ? pendingRequest.userText : composer.trim();
+    const code = isRetry ? pendingRequest.code : attachedCode.trim();
+    const messageText = isRetry
+      ? pendingRequest.messageText
+      : code
+        ? `${userText || "Please help me understand this code."}\n\nAttached code:\n${code}`
+        : userText;
 
-    const title =
-      activeConversation.messages.length === 0 && userText
-        ? userText.slice(0, 42) + (userText.length > 42 ? "…" : "")
-        : activeConversation.title;
+    if (!isRetry) {
+      const userMessage = {
+        id: `user-${Date.now()}`,
+        role: "user",
+        text: userText,
+        code: code || null
+      };
 
-    const newStreamEntry = code
-      ? { id: `stream-${Date.now()}`, code, source: "user" }
-      : null;
+      const title =
+        conversationAtSend.messages.length === 0 && userText
+          ? userText.slice(0, 42) + (userText.length > 42 ? "…" : "")
+          : conversationAtSend.title;
 
-    updateActiveConversation({
-      title,
-      updated: "Just now",
-      hasCode: Boolean(activeConversation.hasCode || code),
-      messages: [...activeConversation.messages, userMessage],
-      codeStreamEntries: code
-        ? [...(activeConversation.codeStreamEntries || []), newStreamEntry]
-        : activeConversation.codeStreamEntries || []
-    });
+      const newStreamEntry = code
+        ? { id: `stream-${Date.now()}`, code, source: "user" }
+        : null;
 
-    if (code) {
-      setCodeStreamEntries((current) => [
-        ...current,
-        { id: `stream-${Date.now()}`, code, source: "user" }
-      ]);
+      pendingRequestRef.current = {
+        conversationId: conversationIdAtSend,
+        userMessageId: userMessage.id,
+        userText,
+        code,
+        messageText
+      };
+
+      setComposer("");
+      setAttachedCode("");
+
+      setConversations((current) =>
+        current.map((conversation) =>
+          conversation.id === conversationIdAtSend
+            ? {
+                ...conversation,
+                title,
+                updated: "Just now",
+                hasCode: Boolean(conversation.hasCode || code),
+                messages: [...conversation.messages, userMessage],
+                codeStreamEntries: code
+                  ? [...(conversation.codeStreamEntries || []), newStreamEntry]
+                  : conversation.codeStreamEntries || []
+              }
+            : conversation
+        )
+      );
+
+      if (code) {
+        setCodeStreamEntries((current) => [
+          ...current,
+          { id: `stream-${Date.now()}`, code, source: "user" }
+        ]);
+      }
     }
 
     setIsResponding(true);
     setThinkingLong(false);
     setErrorId(null);
+    setErrorMessage("");
 
     clearTimeout(responseTimer.current);
     responseTimer.current = setTimeout(() => setThinkingLong(true), 1200);
 
+    let requestTimeout;
+    const controller = new AbortController();
+
     try {
       const token = localStorage.getItem("cc_auth_token");
       if (!token) {
-        throw new Error("You're not logged in. Please log in and try again.");
+        const authError = new Error("Your session has expired. Please sign in again.");
+        authError.code = "UNAUTHORIZED";
+        authError.retryable = false;
+        throw authError;
       }
 
       const history = [
-        ...(activeConversation.messages || []).map(({ role, text }) => ({
-          role: role === "cc" ? "assistant" : "user",
-          text
-        })),
+        ...(conversationAtSend.messages || [])
+          .filter((message) => message.id !== pendingRequestRef.current?.userMessageId)
+          .map(({ role, text }) => ({
+            role: role === "cc" ? "assistant" : "user",
+            text
+          })),
         { role: "user", text: messageText }
       ];
+
+      requestTimeout = setTimeout(() => controller.abort(), 45000);
 
       const response = await fetch("http://localhost:3000/chat", {
         method: "POST",
@@ -220,12 +265,25 @@ export function useCompanionState() {
           message: messageText,
           conversation: history,
           conversationId: String(conversationIdAtSend)
-        })
+        }),
+        signal: controller.signal
       });
 
-      const result = await response.json();
+      let result = {};
+      try {
+        result = await response.json();
+      } catch {
+        result = {};
+      }
+
       if (!response.ok || !result.success || typeof result.reply !== "string") {
-        throw new Error(result.message || "The backend could not generate a reply.");
+        const code = result.code || (response.status === 401 ? "UNAUTHORIZED" : "");
+        const error = new Error(result.message || "Coding Companion couldn't complete the request.");
+        error.code = code;
+        error.retryable = typeof result.retryable === "boolean"
+          ? result.retryable
+          : response.status === 408 || response.status === 429 || response.status >= 500;
+        throw error;
       }
 
       const assistantMessage = {
@@ -239,26 +297,61 @@ export function useCompanionState() {
         current.map((conversation) =>
           conversation.id === conversationIdAtSend
             ? {
-              ...conversation,
-              messages: [...conversation.messages, assistantMessage],
-              codeStreamEntries: [
-                ...(conversation.codeStreamEntries || []),
-                ...generatedCodeEntries
-              ],
-              hasCode:
-                conversation.hasCode || generatedCodeEntries.length > 0,
-              updated: "Just now"
-            }
+                ...conversation,
+                messages: [...conversation.messages, assistantMessage],
+                codeStreamEntries: [
+                  ...(conversation.codeStreamEntries || []),
+                  ...generatedCodeEntries
+                ],
+                hasCode:
+                  conversation.hasCode || generatedCodeEntries.length > 0,
+                updated: "Just now"
+              }
             : conversation
         )
       );
+
+      pendingRequestRef.current = null;
+      setErrorRetryable(false);
     } catch (error) {
       console.error("Coding Companion chat failed:", error);
+
+      let friendlyMessage = "Something went wrong while getting a response. Please try again.";
+      let retryable = true;
+
+      if (error.name === "AbortError") {
+        friendlyMessage = "The request took too long. Your message is still here; try again.";
+      } else if (error.code === "RATE_LIMITED") {
+        friendlyMessage = error.message || "The chat limit has been reached. Please wait before trying again.";
+      } else if (error.code === "AI_UNAVAILABLE") {
+        friendlyMessage = "The AI service is temporarily unavailable. Please try again shortly.";
+      } else if (error.code === "UNAUTHORIZED") {
+        friendlyMessage = "Your session has expired. Please sign in again.";
+        retryable = false;
+      } else if (error.code === "BAD_REQUEST") {
+        friendlyMessage = error.message || "Please check your message and try again.";
+        retryable = false;
+      } else if (error instanceof TypeError) {
+        friendlyMessage = "Couldn't connect to Coding Companion. Check your internet connection and try again.";
+      } else if (error.message && error.message !== "Failed to fetch") {
+        friendlyMessage = error.message;
+      }
+
+      retryable = error.retryable ?? retryable;
+      setErrorMessage(friendlyMessage);
+      setErrorRetryable(retryable);
       setErrorId(Date.now());
     } finally {
+      clearTimeout(requestTimeout);
       clearTimeout(responseTimer.current);
       setIsResponding(false);
       setThinkingLong(false);
+    }
+  }
+
+  function retryMessage() {
+    if (errorRetryable && pendingRequestRef.current) {
+      sendMessage(true);
     }
   }
 
@@ -285,6 +378,8 @@ export function useCompanionState() {
     isResponding,
     thinkingLong,
     errorId,
+    errorMessage,
+    errorRetryable,
     setErrorId,
     undo,
     showJump,
@@ -294,6 +389,7 @@ export function useCompanionState() {
     selectConversation,
     deleteConversation,
     restoreDeletedConversation,
-    sendMessage
+    sendMessage,
+    retryMessage
   };
 }
