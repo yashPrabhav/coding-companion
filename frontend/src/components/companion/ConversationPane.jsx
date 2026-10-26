@@ -16,6 +16,8 @@ export default function ConversationPane({
   isResponding,
   thinkingLong,
   errorId,
+  errorMessage,
+  errorRetryable,
   onRetry,
   showJump,
   setShowJump
@@ -131,11 +133,16 @@ export default function ConversationPane({
 
             {errorId && (
               <div className="cc-inline-error">
-                <span>CC couldn't complete that response.</span>
-                <button onClick={onRetry}>
-                  <Icon name="refresh" size={14} />
-                  Retry
-                </button>
+                <div className="cc-inline-error-copy">
+                  <strong>Couldn't get a response</strong>
+                  <span>{errorMessage || "Something went wrong. Please try again."}</span>
+                </div>
+                {errorRetryable && (
+                  <button onClick={onRetry}>
+                    <Icon name="refresh" size={14} />
+                    Retry
+                  </button>
+                )}
               </div>
             )}
           </div>
