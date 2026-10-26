@@ -160,7 +160,7 @@ router.post("/", authenticate, async (req, res) => {
       message = "The AI service is temporarily unavailable. Please try again shortly.";
     } else if (
       error.name === "SyntaxError" ||
-      /invalid json|must be|required/.test(errorText)
+      /invalid json/.test(errorText)
     ) {
       status = 400;
       code = "BAD_REQUEST";
