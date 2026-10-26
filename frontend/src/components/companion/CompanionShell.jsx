@@ -73,8 +73,7 @@ export default function CompanionShell() {
   }
 
   function retry() {
-    state.setErrorId(null);
-    // Real retry behavior will be connected when the LLM service is wired in.
+    state.retryMessage();
   }
 
   return (
@@ -143,6 +142,8 @@ export default function CompanionShell() {
             isResponding={state.isResponding}
             thinkingLong={state.thinkingLong}
             errorId={state.errorId}
+            errorMessage={state.errorMessage}
+            errorRetryable={state.errorRetryable}
             onRetry={retry}
             showJump={state.showJump}
             setShowJump={state.setShowJump}
