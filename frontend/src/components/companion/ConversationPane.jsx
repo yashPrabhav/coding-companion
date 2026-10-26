@@ -5,6 +5,7 @@ import Icon from "./Icons";
 
 export default function ConversationPane({
   conversation,
+  onNewConversation,
   codeOpen,
   onToggleCode,
   composer,
@@ -39,7 +40,7 @@ export default function ConversationPane({
 
     setShowJump(
       element.scrollTop + element.clientHeight <
-        element.scrollHeight - 260
+      element.scrollHeight - 260
     );
   }
 
@@ -49,6 +50,36 @@ export default function ConversationPane({
       behavior: "smooth"
     });
     setShowJump(false);
+  }
+
+  if (!conversation) {
+    return (
+      <section className="cc-conversation-pane">
+        <div className="cc-welcome-state">
+          <div className="cc-welcome-mark">CC</div>
+          <h1>Ready when you are.</h1>
+          <p>
+            Start a conversation to learn something, solve a problem,
+            or work through some code.
+          </p>
+          <button
+            className="cc-start-conversation"
+            onClick={onNewConversation}
+          >
+            Start a conversation
+          </button>
+        </div>
+        <Composer
+          value={composer}
+          onChange={setComposer}
+          attachedCode={attachedCode}
+          onRemoveAttachment={() => setAttachedCode("")}
+          onOpenEditor={onOpenEditor}
+          onSend={onSend}
+          isResponding={isResponding}
+        />
+      </section>
+    );
   }
 
   return (

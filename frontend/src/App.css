@@ -412,10 +412,14 @@
 }
 
 @keyframes cc-pulse {
-  0%, 60%, 100% {
+
+  0%,
+  60%,
+  100% {
     opacity: 0.25;
     transform: translateY(0);
   }
+
   30% {
     opacity: 1;
     transform: translateY(-2px);
@@ -1007,4 +1011,32 @@
   .cc-editor-modal {
     height: 88vh;
   }
+}
+
+
+.cc-start-conversation {
+  margin-top: 12px;
+  padding: 12px 22px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: var(--cc-accent, #6366f1);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.cc-start-conversation:hover {
+  background: var(--cc-accent-hover, #4f46e5);
+  transform: translateY(-1px);
+}
+
+.cc-start-conversation:active {
+  transform: translateY(0);
+}
+
+.cc-start-conversation:focus-visible {
+  outline: 2px solid var(--cc-accent, #6366f1);
+  outline-offset: 3px;
 }

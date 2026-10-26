@@ -1,295 +1,532 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>AI Learning Memory</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/style_v1.0.css">
+    <meta name="description"
+        content="Coding Companion helps you understand code through personalized explanations, guided problem-solving, and learning that builds on what you know." />
+
+    <meta name="theme-color" content="#080b14" />
+
+    <title>Coding Companion — Understand Code, Build Confidence</title>
+
+    <link rel="stylesheet" href="css/style_v1.0.css" />
 </head>
 
-<script src="js/user.js"></script>
-<script src="js/userdisplay.js"></script>
-<script src="js/userupdate.js"></script>
-<script src="js/main.js"></script>
-
-
-
 <body>
+    <!-- Navigation -->
+    <header class="site-header" id="home">
+        <a class="brand" href="#home" aria-label="Coding Companion home">
+            <span class="brand-icon">CC</span>
+            <span>Coding Companion</span>
+        </a>
 
-    <header>
-
-        <nav>
-
-            <h2>AI Learning Memory</h2>
-
-            <div class="nav-links">
-
-                <a href="#">Home</a>
-                <a href="#">Features</a>
-                <a href="#">About</a>
-                <a href="#">Login</a>
-
-            </div>
-
+        <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#about">About</a>
+            <a href="help.html">Help</a>
         </nav>
 
+        <div class="header-actions">
+            <a class="nav-login" href="#get-started">Get Started</a>
+            <button class="mobile-menu-button" id="mobile-menu-button" type="button" aria-label="Toggle navigation"
+                aria-expanded="false" aria-controls="main-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
     </header>
 
-    <section class="hero">
+    <main>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    A BETTER WAY TO LEARN CODE
+                </div>
 
-        <div class="hero-text">
+                <h1>
+                    Don't just write code.
+                    <span>Understand it.</span>
+                </h1>
 
-            <h1>Learn Programming Based on What You Already Know</h1>
+                <p class="hero-description">
+                    Meet your AI coding learning companion. Explore concepts,
+                    work through problems, and build real understanding at your
+                    own pace.
+                </p>
 
-            <p>
-                AI Learning Memory remembers your knowledge and explains new
-                programming concepts using what you already understand.
-            </p>
+                <div class="hero-actions" id="get-started">
+                    <a class="button button-primary" href="http://localhost:5173" data-app-link>
+                        Start Learning
+                        <span aria-hidden="true">↗</span>
+                    </a>
 
-            <button>Get Started</button>
+                    <a class="button button-secondary" href="#how-it-works">
+                        See How It Works
+                    </a>
+                </div>
 
-        </div>
-
-        <div class="hero-image">
-
-            <h2>🚀 AI Illustration Coming Soon</h2>
-
-        </div>
-
-    </section>
-    <section class="features">
-
-        <h2>Features</h2>
-
-        <div class="fcard">
-
-            <div class="card">
-                <h3>🧠 Personalized Explanations</h3>
-                <p>AI explains concepts according to your current understanding.</p>
+                <div class="hero-note">
+                    <span class="note-icon" aria-hidden="true">✦</span>
+                    <span>Ask questions. Explore ideas. Learn by understanding.</span>
+                </div>
             </div>
 
-            <div class="card">
-                <h3>📈 Learns Your Strengths</h3>
-                <p>Tracks your progress and identifies weak topics automatically.</p>
-            </div>
+            <!-- Illustrative product preview -->
+            <div class="hero-visual" aria-label="Illustration of a Coding Companion conversation">
+                <div class="ambient ambient-one"></div>
+                <div class="ambient ambient-two"></div>
 
-            <div class="card">
-                <h3>🎯 Smart Practice</h3>
-                <p>Questions adapt to your learning level every day.</p>
-            </div>
+                <div class="product-window">
+                    <div class="window-header">
+                        <div class="window-dots" aria-hidden="true">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
 
-        </div>
-
-    </section>
-
-    <section class="how-it-works">
-
-        <h2>How it works</h2>
-        <p class="how-description">
-            See how our AI helps you become a better programmer in three simple steps.
-        </p>
-
-        <div class="step-card">
-
-            <div class="scard">
-                <h3>🎯Set Your Goal</h3>
-                <p>Tell the AI what you want to learn and your current experience.</p>
-            </div>
-
-            <div class="srep-arrow">
-                →
-            </div>
-
-            <div class="scard">
-                <h3>🧠Get Your Personalized Roadmap</h3>
-                <p>The AI creates a learning path tailored to your goals and adjusts it as you improve.</p>
-            </div>
-
-            <div class="srep-arrow">
-                →
-            </div>
-
-            <div class="scard">
-                <h3>💻 Learn, Practice & Grow</h3>
-                <p>Complete lessons, solve challenges, receive feedback, and track your progress.</p>
-            </div>
-
-        </div>
-
-    </section>
-
-    <section class="testimonials">
-        <h2>Early User Feedback</h2>
-        <p>Sample testimonials shown below.
-            Real user feedback will appear after beta launch.</p>
-        <div class="testimonial-container">
-            <div class="testimonial-card">
-                <div class="testimonial-header">
-                    <div class="avatar">
-                        <p>
-                            🙂
-                        </p>
+                        <span class="window-title">Coding Companion</span>
+                        <span class="window-status">Learning space</span>
                     </div>
-                    <div class="user-info">
-                        <h3>Name</h3>
-                        <p>Role</p>
-                        <div class="stars">
-                            ⭐⭐⭐⭐⭐
+
+                    <div class="preview-layout">
+                        <aside class="preview-sidebar" aria-label="Illustrative sidebar">
+                            <div class="preview-logo">CC</div>
+
+                            <div class="preview-sidebar-item active">
+                                <span>✦</span>
+                                <span>Learn</span>
+                            </div>
+
+                            <div class="preview-sidebar-item">
+                                <span>⌘</span>
+                                <span>Code</span>
+                            </div>
+
+                            <div class="preview-sidebar-item">
+                                <span>◷</span>
+                                <span>History</span>
+                            </div>
+
+                            <div class="preview-sidebar-bottom">?</div>
+                        </aside>
+
+                        <div class="preview-chat">
+                            <div class="preview-chat-heading">
+                                <div>
+                                    <span class="preview-overline">YOUR AI MENTOR</span>
+                                    <h3>Let's understand loops</h3>
+                                </div>
+                                <span class="mentor-avatar">✦</span>
+                            </div>
+
+                            <div class="preview-message user-preview-message">
+                                Why do we use loops in Python?
+                            </div>
+
+                            <div class="preview-answer">
+                                <div class="answer-label">
+                                    <span class="answer-sparkle">✦</span>
+                                    LET'S BREAK IT DOWN
+                                </div>
+
+                                <p>
+                                    A loop lets you repeat instructions without writing
+                                    the same code again and again.
+                                </p>
+
+                                <div class="code-snippet">
+                                    <span class="code-line-number">1</span>
+                                    <code>for i in range(3):</code>
+                                    <br />
+                                    <span class="code-line-number">2</span>
+                                    <code class="code-indent">print(i)</code>
+                                </div>
+
+                                <p class="preview-follow-up">
+                                    What do you think this code prints?
+                                </p>
+                            </div>
+
+                            <div class="preview-composer">
+                                <span>Think it through...</span>
+                                <span class="composer-arrow">↑</span>
+                            </div>
+
+                            <div class="preview-caption">
+                                An illustrative preview, not a live app screenshot.
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="review">
-                    <p>
-                        This AI coding companion helped me understand Flexbox much faster than reading documentation.
-                    </p>
+
+                <div class="floating-note floating-note-top">
+                    <span class="floating-icon">✧</span>
+                    <span>
+                        <strong>Learn step by step</strong>
+                        <small>Build understanding</small>
+                    </span>
+                </div>
+
+                <div class="floating-note floating-note-bottom">
+                    <span class="floating-check">✓</span>
+                    <span>
+                        <strong>Your learning journey</strong>
+                        <small>One concept at a time</small>
+                    </span>
                 </div>
             </div>
+        </section>
 
-            <div class="testimonial-card">
-                <div class="testimonial-header">
-                    <div class="avatar">
-                        <p>
-                            🙂
-                        </p>
-                    </div>
-                    <div class="user-info">
-                        <h3>Name</h3>
-                        <p>Role</p>
-                        <div class="stars">
-                            ⭐⭐⭐⭐⭐
-                        </div>
-                    </div>
-                </div>
-                <div class="review">
-                    <p>
-                        This AI coding companion helped me understand Flexbox much faster than reading documentation.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-    </section>
-
-    <section class="faqs-section">
-
-        <h2>Frequently Asked Questions(FAQs)</h2>
-        <p class="faq-description">
-            Still have questions?
-            Here are answers to the most common ones.
-        </p>
-
-        <div class="faq-container">
-
-            <div class="faq-item">
-                <div class="question">
-                    <span class="faq-arrow">▼</span>
-                    <p>Is AI Coding Learning Companion free?</p>
-                </div>
-                <div class="answer">
-                    <p>
-                        Yes. The core features are completely free.
-                    </p>
-                </div>
+        <!-- Value proposition -->
+        <section class="value-strip" aria-label="Our learning approach">
+            <div class="value-item">
+                <span class="value-symbol">01</span>
+                <span>Understand the concept</span>
             </div>
 
-            <div class="faq-item">
-                <div class="question">
-                    <span class="faq-arrow">▼</span>
-                    <p> Do I need prior coding experience?</p>
-                </div>
-                <div class="answer">
-                    <p>
-                        No,prior coding experience is not needed.
-                    </p>
-                </div>
+            <span class="value-divider" aria-hidden="true"></span>
+
+            <div class="value-item">
+                <span class="value-symbol">02</span>
+                <span>Work through the problem</span>
             </div>
 
-            <div class="faq-item">
-                <div class="question">
-                    <span class="faq-arrow">▼</span>
-                    <p>Which programming languages are supported?</p>
-                </div>
-                <div class="answer">
-                    <p>
-                        It supports every coding language.
-                    </p>
-                </div>
+            <span class="value-divider" aria-hidden="true"></span>
+
+            <div class="value-item">
+                <span class="value-symbol">03</span>
+                <span>Learn from your mistakes</span>
             </div>
+        </section>
 
-            <div class="faq-item">
-                <div class="question">
-                    <span class="faq-arrow">▼</span>
-                    <p> Is there a daily usage limit?</p>
-                </div>
-                <div class="answer">
-                    <p>
-                        Yes. It have a daily limit.
-                    </p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="question">
-                    <span class="faq-arrow">▼</span>
-                    <p>Is my data secure and private?</p>
-                </div>
-                <div class="answer">
-                    <p>
-                        Yes. Your data will be safe.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-    </section>
-
-    <section class="cta-section">
-        <h2>Ready to Start Your Coding Journey?</h2>
-        <div class="cta-container">
-            <div class="cta-description">
+        <!-- Features -->
+        <section class="section features-section" id="features">
+            <div class="section-heading">
+                <span class="eyebrow">BUILT AROUND YOUR LEARNING</span>
+                <h2>A companion for the way <span>you learn.</span></h2>
                 <p>
-                    Start your personalized coding journey today
-                    with an AI mentor that adapts to your learning.
+                    Coding is more than getting the right answer. It is about
+                    understanding why that answer works and learning how to
+                    solve the next problem yourself.
                 </p>
             </div>
-            <div class="cta-button">
-                <button>
-                    Start Learning Free
-                </button>
+
+            <div class="features-grid">
+                <article class="feature-card feature-card-large">
+                    <div class="feature-icon feature-icon-purple">✦</div>
+                    <span class="feature-label">01 / UNDERSTAND</span>
+                    <h3>Make difficult concepts easier to understand.</h3>
+                    <p>
+                        Explore unfamiliar ideas through clear explanations,
+                        examples, and follow-up questions that help you think.
+                    </p>
+
+                    <div class="concept-illustration" aria-hidden="true">
+                        <div class="concept-node node-one">Concept</div>
+                        <div class="concept-connector"></div>
+                        <div class="concept-node node-two">Example</div>
+                        <div class="concept-connector"></div>
+                        <div class="concept-node node-three">Understanding</div>
+                    </div>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon feature-icon-blue">⌘</div>
+                    <span class="feature-label">02 / EXPLORE</span>
+                    <h3>Learn with your code.</h3>
+                    <p>
+                        Bring code into the conversation and ask about the
+                        specific lines, ideas, or errors you want to understand.
+                    </p>
+
+                    <div class="mini-code" aria-hidden="true">
+                        <span class="mini-code-muted"># Try to understand this</span>
+                        <br />
+                        <span class="mini-code-purple">numbers</span> = [1, 2, 3]
+                        <br />
+                        <span class="mini-code-blue">for</span> n
+                        <span class="mini-code-blue">in</span> numbers:
+                        <br />
+                        &nbsp;&nbsp;print(n)
+                    </div>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon feature-icon-green">↗</div>
+                    <span class="feature-label">03 / PRACTICE</span>
+                    <h3>Build problem-solving confidence.</h3>
+                    <p>
+                        Use questions and guided reasoning to practise thinking
+                        through a problem instead of simply copying an answer.
+                    </p>
+
+                    <div class="practice-illustration" aria-hidden="true">
+                        <span class="practice-step completed">Understand the problem <b>✓</b></span>
+                        <span class="practice-step completed">Explore an approach <b>✓</b></span>
+                        <span class="practice-step current">Try it yourself <b>→</b></span>
+                    </div>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon feature-icon-orange">◷</div>
+                    <span class="feature-label">04 / CONTINUE</span>
+                    <h3>Keep your learning organized.</h3>
+                    <p>
+                        Separate conversations by topic so you can return to
+                        the discussion you need when continuing your work.
+                    </p>
+
+                    <div class="topic-illustration" aria-hidden="true">
+                        <div class="topic-row"><span>✦</span> Python basics</div>
+                        <div class="topic-row"><span>✦</span> Loops and functions</div>
+                        <div class="topic-row"><span>✦</span> Problem solving</div>
+                    </div>
+                </article>
             </div>
-        </div>
-    </section>
 
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="brand">
-                <h3>AI Coding Learning Companion</h3>
-                <p>Learn coding...</p>
+            <p class="feature-note">
+                Features and behaviour depend on the capabilities available
+                in the current version of the app.
+            </p>
+        </section>
+
+        <!-- How it works -->
+        <section class="section how-section" id="how-it-works">
+            <div class="section-heading centered-heading">
+                <span class="eyebrow">A SIMPLE PLACE TO START</span>
+                <h2>From confusion to <span>understanding.</span></h2>
+                <p>
+                    Start with what you want to learn. Then work through it
+                    one step at a time.
+                </p>
             </div>
 
-            <div class="quick-links">
-                <h3>Quick links</h3>
-                <a href="#">Home</a>
-                <a href="#">Features</a>
-                <a href="#">Working</a>
-                <a href="#">Reviews</a>
-                <a href="#">FAQs</a>
+            <div class="journey">
+                <article class="journey-step">
+                    <div class="journey-number">01</div>
+                    <div class="journey-line"></div>
+                    <h3>Tell us what you're learning</h3>
+                    <p>
+                        Ask a question, share a goal, or explain where you
+                        are getting stuck.
+                    </p>
+                </article>
+
+                <article class="journey-step">
+                    <div class="journey-number">02</div>
+                    <div class="journey-line"></div>
+                    <h3>Explore the idea together</h3>
+                    <p>
+                        Break down the concept, examine examples, and ask
+                        follow-up questions.
+                    </p>
+                </article>
+
+                <article class="journey-step">
+                    <div class="journey-number">03</div>
+                    <div class="journey-line"></div>
+                    <h3>Try it yourself</h3>
+                    <p>
+                        Apply what you have learned and use mistakes as
+                        opportunities to improve.
+                    </p>
+                </article>
             </div>
 
-            <div class="connect">
-                <h3>Connect</h3>
-                <a href="#">Placeholder</a>
-                <a href="#">Placeholder</a>
-                <a href="#">Placeholder</a>
+            <div class="journey-cta">
+                <div>
+                    <h3>Ready to work on your next concept?</h3>
+                    <p>Start a conversation and take the next step.</p>
+                </div>
 
+                <a class="button button-primary" href="http://localhost:5173" data-app-link>
+                    Open Coding Companion <span aria-hidden="true">↗</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section class="section about-section" id="about">
+            <div class="about-visual" aria-hidden="true">
+                <div class="about-orbit orbit-one"></div>
+                <div class="about-orbit orbit-two"></div>
+                <div class="about-core">CC</div>
+                <div class="about-chip about-chip-one">Curiosity</div>
+                <div class="about-chip about-chip-two">Practice</div>
+                <div class="about-chip about-chip-three">Understanding</div>
+            </div>
+
+            <div class="about-content">
+                <span class="eyebrow">WHY CODING COMPANION?</span>
+                <h2>Because understanding matters more than memorizing.</h2>
+                <p>
+                    Learning to code can feel overwhelming when every new
+                    concept brings more questions. Coding Companion is being
+                    built to make learning more approachable through conversation,
+                    exploration, and practice.
+                </p>
+                <p>
+                    The goal is not just to help you get through today's
+                    problem. It is to help you build the understanding to
+                    approach tomorrow's problem with greater confidence.
+                </p>
+                <a class="text-link" href="help.html">
+                    Explore the Help Center <span aria-hidden="true">→</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section faq-section" id="faq">
+            <div class="section-heading">
+                <span class="eyebrow">GOOD TO KNOW</span>
+                <h2>Frequently asked questions</h2>
+                <p>
+                    A few things to know before you get started.
+                </p>
+            </div>
+
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>What is Coding Companion?</summary>
+                    <p>
+                        Coding Companion is an AI-powered learning product designed
+                        to help people understand coding concepts, explore code,
+                        and practise problem-solving through conversation.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Who is Coding Companion for?</summary>
+                    <p>
+                        It is being built for learners who want help understanding
+                        code and developing their problem-solving skills. The
+                        experience may vary depending on the current product version.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Can I ask questions about code I have written?</summary>
+                    <p>
+                        Yes. You can share relevant code using the controls available
+                        in the app and ask questions about how it works, what it
+                        means, or where you are stuck.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Does Coding Companion guarantee correct answers?</summary>
+                    <p>
+                        No AI system is guaranteed to be correct every time.
+                        Review explanations, test code, and verify important
+                        information rather than relying on an answer blindly.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>How can I get help using the app?</summary>
+                    <p>
+                        Visit our
+                        <a href="help.html">Help Center</a>
+                        for getting-started instructions and tutorials. You can
+                        also email
+                        <a href="mailto:prabhasuman3010@gmail.com">
+                            prabhasuman3010@gmail.com
+                        </a>.
+                    </p>
+                </details>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="final-cta">
+            <div class="final-cta-decoration" aria-hidden="true"></div>
+
+            <div class="final-cta-content">
+                <span class="eyebrow">YOUR NEXT STEP STARTS HERE</span>
+                <h2>Every expert was once a beginner.</h2>
+                <p>
+                    Bring your questions, stay curious, and keep learning.
+                </p>
+
+                <a class="button button-light" href="http://localhost:5173" data-app-link>
+                    Start Learning <span aria-hidden="true">↗</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-main">
+            <div class="footer-about">
+                <a class="brand" href="#home">
+                    <span class="brand-icon">CC</span>
+                    <span>Coding Companion</span>
+                </a>
+
+                <p>
+                    Helping learners understand code, build confidence,
+                    and keep moving forward.
+                </p>
+            </div>
+
+            <div class="footer-column">
+                <h3>Explore</h3>
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#about">About</a>
+            </div>
+
+            <div class="footer-column">
+                <h3>Support</h3>
+                <a href="help.html">Help Center</a>
+                <a href="help.html#tutorials">Tutorials</a>
+                <a href="mailto:prabhasuman3010@gmail.com">Contact Us</a>
+            </div>
+
+            <div class="footer-column">
+                <h3>Get Started</h3>
+                <a href="http://localhost:5173" data-app-link>Open the App</a>
+                <a href="help.html#faq">FAQs</a>
             </div>
         </div>
 
         <div class="footer-bottom">
-            <p>© 2026 AI Coding Learning Companion. All rights reserved.</p>
+            <span>© <span id="current-year">2026</span> Coding Companion</span>
+            <span>Built around the idea that understanding matters.</span>
         </div>
     </footer>
+
+    <script>
+        // Update the copyright year automatically.
+        document.getElementById("current-year").textContent =
+            new Date().getFullYear();
+
+        // Mobile navigation.
+        const menuButton = document.getElementById("mobile-menu-button");
+        const mainNav = document.getElementById("main-nav");
+
+        menuButton.addEventListener("click", () => {
+            const isOpen = mainNav.classList.toggle("nav-open");
+            menuButton.setAttribute("aria-expanded", String(isOpen));
+        });
+
+        // Close mobile navigation after choosing a link.
+        mainNav.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => {
+                mainNav.classList.remove("nav-open");
+                menuButton.setAttribute("aria-expanded", "false");
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -138,6 +138,7 @@ export default function CompanionShell() {
             attachedCode={state.attachedCode}
             setAttachedCode={state.setAttachedCode}
             onOpenEditor={openEditor}
+            onNewConversation={state.newConversation}
             onSend={state.sendMessage}
             isResponding={state.isResponding}
             thinkingLong={state.thinkingLong}

@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { demoConversations } from "../data/demoConversations";
 
 function extractCodeBlocks(text) {
   const codeBlocks = [];
@@ -23,8 +22,31 @@ function extractCodeBlocks(text) {
 }
 
 export function useCompanionState() {
-  const [conversations, setConversations] = useState(demoConversations);
-  const [activeId, setActiveId] = useState(1);
+
+  function loadSavedChatState() {
+    try {
+      const saved = localStorage.getItem("cc_chat_state");
+      if (!saved) return { conversations: [], activeId: null };
+
+      const parsed = JSON.parse(saved);
+
+      if (!Array.isArray(parsed.conversations)) {
+        return { conversations: [], activeId: null };
+      }
+
+      const activeExists = parsed.conversations.some(
+        (conversation) => conversation.id === parsed.activeId
+      );
+
+      return {
+        conversations: parsed.conversations,
+        activeId: activeExists ? parsed.activeId : null
+      };
+    } catch {
+      return { conversations: [], activeId: null };
+    }
+  }
+
   const [search, setSearch] = useState("");
   const [codeOpen, setCodeOpen] = useState(true);
   const [composer, setComposer] = useState("");
@@ -40,6 +62,13 @@ export function useCompanionState() {
   const [errorRetryable, setErrorRetryable] = useState(true);
   const pendingRequestRef = useRef(null);
   const [undo, setUndo] = useState(null);
+  const [conversations, setConversations] = useState(
+    () => loadSavedChatState().conversations
+  );
+
+  const [activeId, setActiveId] = useState(
+    () => loadSavedChatState().activeId
+  );
   const [showJump, setShowJump] = useState(false);
   const responseTimer = useRef(null);
 
@@ -56,11 +85,18 @@ export function useCompanionState() {
   }, [conversations, search]);
 
   useEffect(() => {
-    // The code workspace is an independent learner workspace.
-    // Switching conversations must not silently import code from messages.
-    setWorkspaceCode("");
-    setAttachedCode("");
-  }, [activeId]);
+    try {
+      localStorage.setItem(
+        "cc_chat_state",
+        JSON.stringify({
+          conversations,
+          activeId
+        })
+      );
+    } catch (error) {
+      console.error("Could not save chat state:", error);
+    }
+  }, [conversations, activeId]);
 
   useEffect(() => {
     return () => clearTimeout(responseTimer.current);
@@ -202,15 +238,15 @@ export function useCompanionState() {
         current.map((conversation) =>
           conversation.id === conversationIdAtSend
             ? {
-                ...conversation,
-                title,
-                updated: "Just now",
-                hasCode: Boolean(conversation.hasCode || code),
-                messages: [...conversation.messages, userMessage],
-                codeStreamEntries: code
-                  ? [...(conversation.codeStreamEntries || []), newStreamEntry]
-                  : conversation.codeStreamEntries || []
-              }
+              ...conversation,
+              title,
+              updated: "Just now",
+              hasCode: Boolean(conversation.hasCode || code),
+              messages: [...conversation.messages, userMessage],
+              codeStreamEntries: code
+                ? [...(conversation.codeStreamEntries || []), newStreamEntry]
+                : conversation.codeStreamEntries || []
+            }
             : conversation
         )
       );
@@ -297,16 +333,16 @@ export function useCompanionState() {
         current.map((conversation) =>
           conversation.id === conversationIdAtSend
             ? {
-                ...conversation,
-                messages: [...conversation.messages, assistantMessage],
-                codeStreamEntries: [
-                  ...(conversation.codeStreamEntries || []),
-                  ...generatedCodeEntries
-                ],
-                hasCode:
-                  conversation.hasCode || generatedCodeEntries.length > 0,
-                updated: "Just now"
-              }
+              ...conversation,
+              messages: [...conversation.messages, assistantMessage],
+              codeStreamEntries: [
+                ...(conversation.codeStreamEntries || []),
+                ...generatedCodeEntries
+              ],
+              hasCode:
+                conversation.hasCode || generatedCodeEntries.length > 0,
+              updated: "Just now"
+            }
             : conversation
         )
       );
@@ -354,6 +390,32 @@ export function useCompanionState() {
       sendMessage(true);
     }
   }
+
+
+  function loadSavedChatState() {
+    try {
+      const saved = localStorage.getItem("cc_chat_state");
+      if (!saved) return { conversations: [], activeId: null };
+
+      const parsed = JSON.parse(saved);
+
+      if (!Array.isArray(parsed.conversations)) {
+        return { conversations: [], activeId: null };
+      }
+
+      const activeExists = parsed.conversations.some(
+        (conversation) => conversation.id === parsed.activeId
+      );
+
+      return {
+        conversations: parsed.conversations,
+        activeId: activeExists ? parsed.activeId : null
+      };
+    } catch {
+      return { conversations: [], activeId: null };
+    }
+  }
+
 
   return {
     conversations,
