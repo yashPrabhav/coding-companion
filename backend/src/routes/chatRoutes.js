@@ -121,11 +121,71 @@ router.post("/", authenticate, async (req, res) => {
       persistence: persistenceResult.persistence
     });
   } catch (error) {
-    console.error("Chat request failed:", error.message);
+    const providerStatus = Number(error.status || error.statusCode || 0);
+    const errorText = String(error.message || "").toLowerCase();
+    let status = 500;
+    let code = "INTERNAL_ERROR";
+    let message = "Something went wrong while preparing your response. Please try again.";
+    let retryable = true;
+    let retryAfterSeconds;
 
-    return res.status(500).json({
+    if (
+      providerStatus === 429 ||
+      /rate.?limit|quota exceeded|resource exhausted|too many requests/.test(errorText)
+    ) {
+      status = 429;
+      code = "RATE_LIMITED";
+      message = "The chat service has reached its current limit. Please wait a little before trying again.";
+      const retryDelay = Number(error.retryAfter || error.retry_after || 0);
+      if (Number.isFinite(retryDelay) && retryDelay > 0) {
+        retryAfterSeconds = Math.ceil(retryDelay);
+      }
+    } else if (
+      providerStatus === 408 ||
+      providerStatus === 504 ||
+      error.name === "AbortError" ||
+      /timed out|timeout|deadline exceeded/.test(errorText)
+    ) {
+      status = 504;
+      code = "REQUEST_TIMEOUT";
+      message = "The response took too long. Please try again.";
+    } else if (
+      providerStatus === 503 ||
+      providerStatus === 502 ||
+      providerStatus === 500 ||
+      /service unavailable|temporarily unavailable|overloaded|internal server error/.test(errorText)
+    ) {
+      status = 503;
+      code = "AI_UNAVAILABLE";
+      message = "The AI service is temporarily unavailable. Please try again shortly.";
+    } else if (
+      error.name === "SyntaxError" ||
+      /invalid json|must be|required/.test(errorText)
+    ) {
+      status = 400;
+      code = "BAD_REQUEST";
+      message = "The request could not be processed. Please check your message and try again.";
+      retryable = false;
+    }
+
+    // Keep provider internals in server logs; never send stack traces or keys to the browser.
+    console.error("Chat request failed:", {
+      code,
+      status,
+      name: error.name,
+      message: error.message
+    });
+
+    if (retryAfterSeconds) {
+      res.set("Retry-After", String(retryAfterSeconds));
+    }
+
+    return res.status(status).json({
       success: false,
-      message: "Unable to generate a teaching response. Check the backend logs."
+      code,
+      message,
+      retryable,
+      ...(retryAfterSeconds ? { retryAfterSeconds } : {})
     });
   }
 });
