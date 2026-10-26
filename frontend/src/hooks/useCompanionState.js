@@ -218,7 +218,8 @@ export function useCompanionState() {
         },
         body: JSON.stringify({
           message: messageText,
-          conversation: history
+          conversation: history,
+          conversationId: String(conversationIdAtSend)
         })
       });
 
@@ -238,16 +239,16 @@ export function useCompanionState() {
         current.map((conversation) =>
           conversation.id === conversationIdAtSend
             ? {
-                ...conversation,
-                messages: [...conversation.messages, assistantMessage],
-                codeStreamEntries: [
-                  ...(conversation.codeStreamEntries || []),
-                  ...generatedCodeEntries
-                ],
-                hasCode:
-                  conversation.hasCode || generatedCodeEntries.length > 0,
-                updated: "Just now"
-              }
+              ...conversation,
+              messages: [...conversation.messages, assistantMessage],
+              codeStreamEntries: [
+                ...(conversation.codeStreamEntries || []),
+                ...generatedCodeEntries
+              ],
+              hasCode:
+                conversation.hasCode || generatedCodeEntries.length > 0,
+              updated: "Just now"
+            }
             : conversation
         )
       );

@@ -5,7 +5,7 @@ const ai = new GoogleGenAI({
 });
 
 const MODEL =
-    process.env.TEACHING_BRAIN_MODEL || "gemini-3.7-flash";
+    process.env.TEACHING_BRAIN_MODEL || "gemini-3.5-flash-lite";
 
 /*
  * This is the machine-readable contract between
