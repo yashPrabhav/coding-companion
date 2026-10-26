@@ -33,4 +33,42 @@ app.use("/updates", updateRoutes);
 app.use("/auth", authRoutes);
 app.use("/chat", chatRoutes);
 
+// Keep malformed or oversized JSON requests from returning Express's HTML error page.
+app.use((error, req, res, next) => {
+    if (res.headersSent) {
+        return next(error);
+    }
+
+    if (error.type === "entity.parse.failed") {
+        return res.status(400).json({
+            success: false,
+            code: "BAD_REQUEST",
+            message: "The request body contains invalid JSON.",
+            retryable: false
+        });
+    }
+
+    if (error.type === "entity.too.large") {
+        return res.status(413).json({
+            success: false,
+            code: "REQUEST_TOO_LARGE",
+            message: "This request is too large. Please shorten your message or attached code.",
+            retryable: false
+        });
+    }
+
+    console.error("Unhandled API error:", {
+        method: req.method,
+        path: req.path,
+        message: error.message
+    });
+
+    return res.status(500).json({
+        success: false,
+        code: "INTERNAL_ERROR",
+        message: "Something went wrong. Please try again.",
+        retryable: true
+    });
+});
+
 module.exports = app;
