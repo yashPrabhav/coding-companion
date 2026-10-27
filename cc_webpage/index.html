@@ -1,532 +1,931 @@
 <!DOCTYPE html>
-<html lang="en">
+<lang="en">
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description"
-        content="Coding Companion helps you understand code through personalized explanations, guided problem-solving, and learning that builds on what you know." />
+        <title>Companiyan — Products That Help You Grow</title>
+        <meta name="description"
+            content="Companiyan builds thoughtful digital products. Meet Coding Companion, an AI-powered coding-learning companion designed to help you understand code and become a better problem solver.">
+        <meta name="theme-color" content="#0b0b10">
 
-    <meta name="theme-color" content="#080b14" />
+        <link rel="stylesheet" href="css/style_v1.0.css">
+    </head>
 
-    <title>Coding Companion — Understand Code, Build Confidence</title>
+    <lang='en'>
 
-    <link rel="stylesheet" href="css/style_v1.0.css" />
-</head>
+        <!-- Navigation -->
+        <header class="site-header">
+            <div class="container navbar">
 
-<body>
-    <!-- Navigation -->
-    <header class="site-header" id="home">
-        <a class="brand" href="#home" aria-label="Coding Companion home">
-            <span class="brand-icon">CC</span>
-            <span>Coding Companion</span>
-        </a>
+                <a href="#home" class="brand" aria-label="Companiyan home">
+                    <span class="brand-mark">C</span>
+                    <span>Companiyan</span>
+                </a>
 
-        <nav class="main-nav" id="main-nav" aria-label="Main navigation">
-            <a href="#features">Features</a>
-            <a href="#how-it-works">How It Works</a>
-            <a href="#about">About</a>
-            <a href="help.html">Help</a>
-        </nav>
+                <nav class="nav-links" aria-label="Main navigation">
+                    <a href="#products">Products</a>
+                    <a href="#about-product">About CC</a>
+                    <a href="#how-it-works">How it works</a>
+                    <a href="#faq">FAQs</a>
+                    <a href="#feedback">Feedback</a>
+                </nav>
 
-        <div class="header-actions">
-            <a class="nav-login" href="#get-started">Get Started</a>
-            <button class="mobile-menu-button" id="mobile-menu-button" type="button" aria-label="Toggle navigation"
-                aria-expanded="false" aria-controls="main-nav">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </header>
+                <a href="#products" class="button button-small button-outline">
+                    Explore CC <span aria-hidden="true">↗</span>
+                </a>
 
-    <main>
-        <!-- Hero -->
-        <section class="hero">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <span class="badge-dot"></span>
-                    A BETTER WAY TO LEARN CODE
-                </div>
-
-                <h1>
-                    Don't just write code.
-                    <span>Understand it.</span>
-                </h1>
-
-                <p class="hero-description">
-                    Meet your AI coding learning companion. Explore concepts,
-                    work through problems, and build real understanding at your
-                    own pace.
-                </p>
-
-                <div class="hero-actions" id="get-started">
-                    <a class="button button-primary" href="http://localhost:5173" data-app-link>
-                        Start Learning
-                        <span aria-hidden="true">↗</span>
-                    </a>
-
-                    <a class="button button-secondary" href="#how-it-works">
-                        See How It Works
-                    </a>
-                </div>
-
-                <div class="hero-note">
-                    <span class="note-icon" aria-hidden="true">✦</span>
-                    <span>Ask questions. Explore ideas. Learn by understanding.</span>
-                </div>
             </div>
+        </header>
 
-            <!-- Illustrative product preview -->
-            <div class="hero-visual" aria-label="Illustration of a Coding Companion conversation">
-                <div class="ambient ambient-one"></div>
-                <div class="ambient ambient-two"></div>
 
-                <div class="product-window">
-                    <div class="window-header">
-                        <div class="window-dots" aria-hidden="true">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
+        <main>
 
-                        <span class="window-title">Coding Companion</span>
-                        <span class="window-status">Learning space</span>
+            <!-- Hero -->
+            <section class="hero" id="home">
+                <div class="hero-glow hero-glow-one"></div>
+                <div class="hero-glow hero-glow-two"></div>
+
+                <div class="container hero-inner">
+
+                    <div class="hero-badge">
+                        <span class="live-dot"></span>
+                        Introducing the Companiyan product family
                     </div>
 
-                    <div class="preview-layout">
-                        <aside class="preview-sidebar" aria-label="Illustrative sidebar">
-                            <div class="preview-logo">CC</div>
+                    <p class="hero-overline">ONE BRAND. MANY POSSIBILITIES.</p>
 
-                            <div class="preview-sidebar-item active">
-                                <span>✦</span>
-                                <span>Learn</span>
-                            </div>
+                    <h1>
+                        Products that help you
+                        <span class="gradient-text">move forward.</span>
+                    </h1>
 
-                            <div class="preview-sidebar-item">
-                                <span>⌘</span>
-                                <span>Code</span>
-                            </div>
+                    <p class="hero-description">
+                        Companiyan is building thoughtful digital products
+                        designed to help people learn, create, and solve
+                        meaningful problems. We are starting with coding.
+                    </p>
 
-                            <div class="preview-sidebar-item">
-                                <span>◷</span>
-                                <span>History</span>
-                            </div>
+                    <div class="hero-actions">
+                        <a href="#products" class="button button-primary">
+                            Discover our first product
+                            <span aria-hidden="true">→</span>
+                        </a>
 
-                            <div class="preview-sidebar-bottom">?</div>
-                        </aside>
+                        <a href="#about" class="button button-ghost">
+                            Our vision
+                        </a>
+                    </div>
 
-                        <div class="preview-chat">
-                            <div class="preview-chat-heading">
+                    <div class="hero-bottom-note">
+                        <span class="hero-line"></span>
+                        <span>Meet Coding Companion — our first product</span>
+                        <span class="hero-line"></span>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- Brand philosophy -->
+            <section class="brand-intro section">
+                <div class="container brand-intro-inner">
+
+                    <div class="brand-intro-label">
+                        <span class="section-index">01</span>
+                        <span>THE IDEA</span>
+                    </div>
+
+                    <div class="brand-intro-copy">
+                        <h2>
+                            One company.
+                            <span class="muted-heading">A growing family of products.</span>
+                        </h2>
+
+                        <p>
+                            We believe technology should do more than complete
+                            tasks. It should help people build understanding,
+                            develop capabilities, and make progress toward
+                            their goals.
+                        </p>
+
+                        <p>
+                            Companiyan is the brand behind that mission.
+                            Each product will focus on solving a real problem,
+                            starting with one clear purpose before expanding
+                            into new possibilities.
+                        </p>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- Product section -->
+            <section class="products section" id="products">
+                <div class="container">
+
+                    <div class="section-heading">
+                        <div class="section-index">02 / OUR FIRST PRODUCT</div>
+                        <h2>
+                            Meet <span class="gradient-text">Coding Companion.</span>
+                        </h2>
+                        <p>
+                            Not just another tool that writes code.
+                            A companion designed to help you learn it.
+                        </p>
+                    </div>
+
+
+                    <article class="product-card">
+
+                        <div class="product-content">
+
+                            <div class="product-brand-line">
+                                <span class="product-logo">CC</span>
                                 <div>
-                                    <span class="preview-overline">YOUR AI MENTOR</span>
-                                    <h3>Let's understand loops</h3>
+                                    <span class="product-parent">A COMPANIYAN PRODUCT</span>
+                                    <span class="product-name-small">Coding Companion</span>
                                 </div>
-                                <span class="mentor-avatar">✦</span>
                             </div>
 
-                            <div class="preview-message user-preview-message">
-                                Why do we use loops in Python?
-                            </div>
+                            <h3>
+                                Understand code.
+                                <span class="product-heading-accent">
+                                    Learn to think.
+                                </span>
+                            </h3>
 
-                            <div class="preview-answer">
-                                <div class="answer-label">
-                                    <span class="answer-sparkle">✦</span>
-                                    LET'S BREAK IT DOWN
+                            <p class="product-lead">
+                                An AI-powered coding-learning companion
+                                built around your learning journey.
+                            </p>
+
+                            <p>
+                                Learning programming is not just about getting
+                                a solution that works. It is about understanding
+                                why it works, recognizing mistakes, and knowing
+                                how to approach the next problem yourself.
+                            </p>
+
+                            <p>
+                                Coding Companion is being built to make that
+                                process more personal. Instead of treating you
+                                as an anonymous prompt, it is designed to build
+                                an understanding of your current level, goals,
+                                progress, and areas where you need help.
+                            </p>
+
+                            <p>
+                                Ask questions, explore difficult concepts,
+                                discuss your approach, and work with code in
+                                one connected learning environment.
+                            </p>
+
+                            <a href="#about-product" class="button button-primary">
+                                Explore the experience
+                                <span aria-hidden="true">↓</span>
+                            </a>
+
+                        </div>
+
+
+                        <!-- Illustrative product preview -->
+                        <div class="product-preview">
+
+                            <div class="preview-topbar">
+                                <div class="preview-brand">
+                                    <span class="preview-logo">CC</span>
+                                    <span>Coding Companion</span>
                                 </div>
 
+                                <span class="preview-indicator">
+                                    <span class="live-dot"></span>
+                                    Learning space
+                                </span>
+                            </div>
+
+                            <div class="preview-workspace">
+
+                                <div class="preview-conversation">
+                                    <div class="preview-label">
+                                        CONVERSATION
+                                    </div>
+
+                                    <div class="preview-message preview-user">
+                                        I understand loops, but I'm struggling
+                                        to solve this problem.
+                                    </div>
+
+                                    <div class="preview-message preview-ai">
+                                        Let's work through it together.
+                                        First, what information changes
+                                        each time the loop runs?
+                                    </div>
+
+                                    <div class="preview-thinking">
+                                        <span class="thinking-dot"></span>
+                                        <span>Reason through the problem</span>
+                                    </div>
+                                </div>
+
+                                <div class="preview-code">
+                                    <div class="preview-code-heading">
+                                        <span>CODE STREAM</span>
+                                        <span class="code-language">PYTHON</span>
+                                    </div>
+
+                                    <div class="code-lines">
+                                        <div><span class="line-number">1</span>
+                                            <span class="code-purple">def</span>
+                                            <span class="code-green">solve</span>():
+                                        </div>
+                                        <div><span class="line-number">2</span>
+                                            &nbsp;&nbsp;
+                                            <span class="code-comment"># Start with your approach</span>
+                                        </div>
+                                        <div><span class="line-number">3</span>
+                                            &nbsp;&nbsp;
+                                            <span class="code-purple">pass</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="preview-code-footer">
+                                        <span class="preview-status"></span>
+                                        Code and conversation stay connected
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="preview-bottom">
+                                <span>One learning context</span>
+                                <span>Two visual channels</span>
+                            </div>
+
+                            <p class="preview-disclaimer">
+                                Illustrative interface preview, not a live app.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+                </div>
+            </section>
+
+
+            <!-- Product philosophy -->
+            <section class="product-details section" id="about-product">
+                <div class="container">
+
+                    <div class="section-heading">
+                        <div class="section-index">03 / THE EXPERIENCE</div>
+                        <h2>
+                            Built around
+                            <span class="gradient-text">how you learn.</span>
+                        </h2>
+                        <p>
+                            The goal is not to replace your thinking.
+                            It is to help you develop it.
+                        </p>
+                    </div>
+
+
+                    <div class="feature-grid">
+
+                        <article class="feature-card">
+                            <span class="feature-number">01</span>
+                            <div class="feature-symbol">01</div>
+                            <h3>Learn through conversation</h3>
+                            <p>
+                                Ask questions in your own words. Discuss
+                                concepts, share your approach, request hints,
+                                and work through confusion without having to
+                                navigate a maze of learning dashboards.
+                            </p>
+                        </article>
+
+                        <article class="feature-card">
+                            <span class="feature-number">02</span>
+                            <div class="feature-symbol">02</div>
+                            <h3>Keep code and learning connected</h3>
+                            <p>
+                                The conversation and Code Stream are two
+                                connected views of the learning experience.
+                                Review code alongside explanations instead
+                                of losing track of what you are discussing.
+                            </p>
+                        </article>
+
+                        <article class="feature-card">
+                            <span class="feature-number">03</span>
+                            <div class="feature-symbol">03</div>
+                            <h3>Build on your learning journey</h3>
+                            <p>
+                                Coding Companion is designed to use relevant
+                                information about your progress and learning
+                                needs so future guidance can build on what
+                                has already been learned.
+                            </p>
+                        </article>
+
+                        <article class="feature-card">
+                            <span class="feature-number">04</span>
+                            <div class="feature-symbol">04</div>
+                            <h3>Understand mistakes</h3>
+                            <p>
+                                Work through errors and difficult ideas.
+                                The intended experience emphasizes reasoning
+                                and understanding, not merely receiving
+                                a finished answer.
+                            </p>
+                        </article>
+
+                        <article class="feature-card">
+                            <span class="feature-number">05</span>
+                            <div class="feature-symbol">05</div>
+                            <h3>Work in one connected space</h3>
+                            <p>
+                                Ask, discuss, write, and review code without
+                                turning the experience into a full-scale IDE.
+                                Keep the focus on learning and problem solving.
+                            </p>
+                        </article>
+
+                        <article class="feature-card">
+                            <span class="feature-number">06</span>
+                            <div class="feature-symbol">06</div>
+                            <h3>Grow beyond one solution</h3>
+                            <p>
+                                The long-term objective is to help you become
+                                more confident and independent when facing
+                                unfamiliar programming problems.
+                            </p>
+                        </article>
+
+                    </div>
+
+                    <p class="development-note">
+                        These describe the intended product experience.
+                        Individual capabilities may still be under development.
+                    </p>
+
+                </div>
+            </section>
+
+
+            <!-- How it works -->
+            <section class="how-it-works section" id="how-it-works">
+                <div class="container">
+
+                    <div class="section-heading">
+                        <div class="section-index">04 / HOW IT WORKS</div>
+                        <h2>
+                            From confusion
+                            <span class="gradient-text">to understanding.</span>
+                        </h2>
+                        <p>
+                            A learning loop built around asking, trying,
+                            understanding, and improving.
+                        </p>
+                    </div>
+
+
+                    <div class="steps">
+
+                        <article class="step">
+                            <div class="step-marker">01</div>
+                            <div class="step-content">
+                                <h3>Start with your question</h3>
                                 <p>
-                                    A loop lets you repeat instructions without writing
-                                    the same code again and again.
-                                </p>
-
-                                <div class="code-snippet">
-                                    <span class="code-line-number">1</span>
-                                    <code>for i in range(3):</code>
-                                    <br />
-                                    <span class="code-line-number">2</span>
-                                    <code class="code-indent">print(i)</code>
-                                </div>
-
-                                <p class="preview-follow-up">
-                                    What do you think this code prints?
+                                    Bring a concept you do not understand,
+                                    a problem you are trying to solve, or
+                                    code that is not behaving as expected.
                                 </p>
                             </div>
+                        </article>
 
-                            <div class="preview-composer">
-                                <span>Think it through...</span>
-                                <span class="composer-arrow">↑</span>
+                        <article class="step">
+                            <div class="step-marker">02</div>
+                            <div class="step-content">
+                                <h3>Think and work through it</h3>
+                                <p>
+                                    Discuss your reasoning, explore relevant
+                                    concepts, and work with code in the
+                                    dedicated Code Stream.
+                                </p>
                             </div>
+                        </article>
 
-                            <div class="preview-caption">
-                                An illustrative preview, not a live app screenshot.
+                        <article class="step">
+                            <div class="step-marker">03</div>
+                            <div class="step-content">
+                                <h3>Understand the why</h3>
+                                <p>
+                                    Focus on why an approach works, where
+                                    a mistake occurred, and which idea
+                                    you can apply to similar problems.
+                                </p>
+                            </div>
+                        </article>
+
+                        <article class="step">
+                            <div class="step-marker">04</div>
+                            <div class="step-content">
+                                <h3>Build on what you learn</h3>
+                                <p>
+                                    The product is designed to make relevant
+                                    learning context useful across interactions,
+                                    helping guidance become more personalized
+                                    over time.
+                                </p>
+                            </div>
+                        </article>
+
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- Why Companiyan -->
+            <section class="about section" id="about">
+                <div class="container about-layout">
+
+                    <div class="about-heading">
+                        <div class="section-index">05 / ABOUT COMPANIYAN</div>
+                        <h2>
+                            A bigger vision.
+                            <span class="gradient-text">One step at a time.</span>
+                        </h2>
+                    </div>
+
+                    <div class="about-copy">
+                        <p>
+                            Companiyan is the parent brand behind a growing
+                            vision for useful digital products. Coding
+                            Companion is our first step, built around the
+                            idea that technology can help people develop
+                            understanding rather than simply finish tasks.
+                        </p>
+
+                        <p>
+                            We want each product to have a clear purpose,
+                            solve a meaningful problem, and improve through
+                            real use and feedback.
+                        </p>
+
+                        <p>
+                            We are starting with one product, learning from
+                            the process, and leaving room for new tools and
+                            products to join the Companiyan family in the
+                            future.
+                        </p>
+
+                        <div class="about-principles">
+                            <div>
+                                <span class="principle-mark">01</span>
+                                <span>Purpose before complexity</span>
+                            </div>
+                            <div>
+                                <span class="principle-mark">02</span>
+                                <span>Useful products over empty promises</span>
+                            </div>
+                            <div>
+                                <span class="principle-mark">03</span>
+                                <span>Grow through learning and feedback</span>
                             </div>
                         </div>
                     </div>
+
+                </div>
+            </section>
+
+
+            <!-- Future product family -->
+            <section class="future section">
+                <div class="container">
+
+                    <div class="section-heading">
+                        <div class="section-index">06 / THE ROAD AHEAD</div>
+                        <h2>
+                            This is just
+                            <span class="gradient-text">the beginning.</span>
+                        </h2>
+                        <p>
+                            Companiyan is designed to grow beyond a single
+                            product as new needs and opportunities emerge.
+                        </p>
+                    </div>
+
+                    <div class="future-card">
+                        <div class="future-orbit" aria-hidden="true">
+                            <div class="orbit-ring orbit-ring-one"></div>
+                            <div class="orbit-ring orbit-ring-two"></div>
+                            <div class="orbit-center">C</div>
+                            <div class="orbit-product orbit-product-one">CC</div>
+                            <div class="orbit-product orbit-product-two">+</div>
+                            <div class="orbit-product orbit-product-three">+</div>
+                        </div>
+
+                        <div class="future-copy">
+                            <span class="future-tag">THE COMPANIYAN FAMILY</span>
+                            <h3>One foundation. More possibilities.</h3>
+                            <p>
+                                Coding Companion is our first product.
+                                Future products and tools may join the
+                                ecosystem as we discover what people need
+                                and what we can build well.
+                            </p>
+                            <span class="future-footnote">
+                                Future products have not been announced.
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- FAQ -->
+            <section class="faq section" id="faq">
+                <div class="container faq-layout">
+
+                    <div class="faq-intro">
+                        <div class="section-index">07 / FAQs</div>
+                        <h2>
+                            A few things
+                            <span class="gradient-text">you might wonder.</span>
+                        </h2>
+                        <p>
+                            Learn more about Companiyan and what we are
+                            building with Coding Companion.
+                        </p>
+                    </div>
+
+                    <div class="faq-list">
+
+                        <details class="faq-item">
+                            <summary>What is Companiyan?</summary>
+                            <div class="faq-answer">
+                                <p>
+                                    Companiyan is the parent brand for our
+                                    digital products. Coding Companion is
+                                    the first product in that family, and
+                                    we intend to leave room for more tools
+                                    and products in the future.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>What is Coding Companion?</summary>
+                            <div class="faq-answer">
+                                <p>
+                                    Coding Companion is an AI-powered
+                                    coding-learning companion being built
+                                    to help learners understand programming,
+                                    reason through problems, work with code,
+                                    and improve their independent problem-solving
+                                    skills.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>How is it different from a code generator?</summary>
+                            <div class="faq-answer">
+                                <p>
+                                    Its purpose is not just to produce code.
+                                    The intended experience connects explanations,
+                                    questions, and code in a learning-focused
+                                    workspace, with an emphasis on understanding
+                                    and progress.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>Who is Coding Companion for?</summary>
+                            <div class="faq-answer">
+                                <p>
+                                    It is being designed primarily for people
+                                    learning programming, including learners
+                                    who need help understanding concepts,
+                                    working through problems, or making sense
+                                    of code they have written.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>Do I need to be an experienced programmer?</summary>
+                            <div class="faq-answer">
+                                <p>
+                                    The product vision includes supporting
+                                    learners at different stages. The aim is
+                                    to make explanations and guidance useful
+                                    to the learner's current understanding,
+                                    rather than assuming everyone knows the
+                                    same things.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>What is the Code Stream?</summary>
+                            <div class="faq-answer">
+                                <p>
+                                    The Code Stream is a dedicated view for
+                                    code connected to the learning conversation.
+                                    It lets learners keep code and explanations
+                                    visible together, rather than mixing every
+                                    code snippet into the normal message flow.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>Will Coding Companion remember my progress?</summary>
+                            <div class="faq-answer">
+                                <p>
+                                    The product is designed to use relevant
+                                    learner context, such as progress and
+                                    learning needs, to personalize future
+                                    guidance. The exact capabilities depend
+                                    on the features available in the released
+                                    version.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>Is Coding Companion available now?</summary>
+                            <div class="faq-answer">
+                                <p>
+                                    Coding Companion is under development.
+                                    Some parts of the experience may still
+                                    be incomplete, so this website describes
+                                    the intended product rather than promising
+                                    that every feature is already available.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>Will Companiyan launch more products?</summary>
+                            <div class="faq-answer">
+                                <p>
+                                    That is the long-term vision. Coding
+                                    Companion is the first product, and
+                                    future products will depend on identifying
+                                    useful problems and building solutions
+                                    worth using. No additional products are
+                                    being announced here.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>How can I share feedback or get in touch?</summary>
+                            <div class="faq-answer">
+                                <p>
+                                    Use the contact option below once the
+                                    official Companiyan contact address has
+                                    been configured. We want to learn from
+                                    feedback as the products develop.
+                                </p>
+                            </div>
+                        </details>
+
+                    </div>
+
+                </div>
+            </section>
+
+
+
+            <!-- Feedback -->
+            <section class="section feedback-section" id="feedback">
+                <div class="section-heading">
+                    <span class="eyebrow">YOUR VOICE MATTERS</span>
+                    <h2>Help us make learning better.</h2>
+                    <p>
+                        Your feedback helps us improve Coding Companion.
+                        Share an idea, report a problem, or tell us about
+                        your experience.
+                    </p>
                 </div>
 
-                <div class="floating-note floating-note-top">
-                    <span class="floating-icon">✧</span>
-                    <span>
-                        <strong>Learn step by step</strong>
-                        <small>Build understanding</small>
-                    </span>
+                <form class="feedback-form" id="feedback-form">
+                    <input type="hidden" name="_subject" value="New Coding Companion Website Feedback" />
+
+                    <!-- Spam honeypot: real visitors should leave this empty. -->
+                    <div class="feedback-honeypot" aria-hidden="true">
+                        <label for="feedback-website">Leave this field empty</label>
+                        <input type="text" id="feedback-website" name="_gotcha" tabindex="-1" autocomplete="off" />
+                    </div>
+
+                    <fieldset class="rating-field">
+                        <legend>How would you rate your experience?</legend>
+                        <div class="rating-options">
+                            <input type="radio" id="rating-1" name="rating" value="1" required />
+                            <label for="rating-1" aria-label="1 star">★</label>
+
+                            <input type="radio" id="rating-2" name="rating" value="2" />
+                            <label for="rating-2" aria-label="2 stars">★</label>
+
+                            <input type="radio" id="rating-3" name="rating" value="3" />
+                            <label for="rating-3" aria-label="3 stars">★</label>
+
+                            <input type="radio" id="rating-4" name="rating" value="4" />
+                            <label for="rating-4" aria-label="4 stars">★</label>
+
+                            <input type="radio" id="rating-5" name="rating" value="5" />
+                            <label for="rating-5" aria-label="5 stars">★</label>
+                        </div>
+                    </fieldset>
+
+                    <div class="feedback-field">
+                        <label for="feedback-category">
+                            What would you like to share?
+                        </label>
+                        <select id="feedback-category" name="category" required>
+                            <option value="" disabled selected>
+                                Choose a category
+                            </option>
+                            <option value="Suggestion">Suggestion</option>
+                            <option value="Bug report">Bug report</option>
+                            <option value="Feature request">Feature request</option>
+                            <option value="General feedback">General feedback</option>
+                        </select>
+                    </div>
+
+                    <div class="feedback-field">
+                        <label for="feedback-message">Your feedback</label>
+                        <textarea id="feedback-message" name="message"
+                            placeholder="Tell us what's working or what we could improve..." minlength="10"
+                            maxlength="2000" rows="5" required></textarea>
+                        <span class="feedback-hint">
+                            Please write at least 10 characters.
+                        </span>
+                    </div>
+
+                    <div class="feedback-field">
+                        <label for="feedback-email">
+                            Email address <span>(optional)</span>
+                        </label>
+                        <input type="email" id="feedback-email" name="email" maxlength="254"
+                            placeholder="you@example.com" autocomplete="email" />
+                        <span class="feedback-hint">
+                            Include your email only if you'd like a reply.
+                        </span>
+                    </div>
+
+                    <button class="button button-primary feedback-submit" id="feedback-submit" type="submit">
+                        <span id="feedback-button-text">Submit Feedback</span>
+                        <span aria-hidden="true">↗</span>
+                    </button>
+
+                    <p class="feedback-status" id="feedback-status" role="status" aria-live="polite"></p>
+                </form>
+            </section>
+
+
+            <!-- Final call to action -->
+            <section class="final-cta section" id="contact">
+                <div class="container final-cta-inner">
+
+                    <span class="cta-orb cta-orb-one"></span>
+                    <span class="cta-orb cta-orb-two"></span>
+
+                    <div class="cta-content">
+                        <span class="section-index">THE JOURNEY STARTS HERE</span>
+
+                        <h2>
+                            First, let's make
+                            <span class="gradient-text">coding click.</span>
+                        </h2>
+
+                        <p>
+                            Discover Coding Companion, the first product
+                            from Companiyan.
+                        </p>
+
+                        <a href="http://localhost:5174" class="button button-primary">
+                            Explore Coding Companion
+                            <span aria-hidden="true">↗</span>
+                        </a>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="container footer-main">
+
+                <div class="footer-brand-block">
+                    <a href="#home" class="brand">
+                        <span class="brand-mark">C</span>
+                        <span>Companiyan</span>
+                    </a>
+
+                    <p>
+                        Thoughtful products. Meaningful progress.
+                    </p>
                 </div>
 
-                <div class="floating-note floating-note-bottom">
-                    <span class="floating-check">✓</span>
-                    <span>
-                        <strong>Your learning journey</strong>
-                        <small>One concept at a time</small>
-                    </span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Value proposition -->
-        <section class="value-strip" aria-label="Our learning approach">
-            <div class="value-item">
-                <span class="value-symbol">01</span>
-                <span>Understand the concept</span>
-            </div>
-
-            <span class="value-divider" aria-hidden="true"></span>
-
-            <div class="value-item">
-                <span class="value-symbol">02</span>
-                <span>Work through the problem</span>
-            </div>
-
-            <span class="value-divider" aria-hidden="true"></span>
-
-            <div class="value-item">
-                <span class="value-symbol">03</span>
-                <span>Learn from your mistakes</span>
-            </div>
-        </section>
-
-        <!-- Features -->
-        <section class="section features-section" id="features">
-            <div class="section-heading">
-                <span class="eyebrow">BUILT AROUND YOUR LEARNING</span>
-                <h2>A companion for the way <span>you learn.</span></h2>
-                <p>
-                    Coding is more than getting the right answer. It is about
-                    understanding why that answer works and learning how to
-                    solve the next problem yourself.
-                </p>
-            </div>
-
-            <div class="features-grid">
-                <article class="feature-card feature-card-large">
-                    <div class="feature-icon feature-icon-purple">✦</div>
-                    <span class="feature-label">01 / UNDERSTAND</span>
-                    <h3>Make difficult concepts easier to understand.</h3>
-                    <p>
-                        Explore unfamiliar ideas through clear explanations,
-                        examples, and follow-up questions that help you think.
-                    </p>
-
-                    <div class="concept-illustration" aria-hidden="true">
-                        <div class="concept-node node-one">Concept</div>
-                        <div class="concept-connector"></div>
-                        <div class="concept-node node-two">Example</div>
-                        <div class="concept-connector"></div>
-                        <div class="concept-node node-three">Understanding</div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Explore</h3>
+                        <a href="#products">Products</a>
+                        <a href="#about-product">Coding Companion</a>
+                        <a href="#how-it-works">How it works</a>
                     </div>
-                </article>
 
-                <article class="feature-card">
-                    <div class="feature-icon feature-icon-blue">⌘</div>
-                    <span class="feature-label">02 / EXPLORE</span>
-                    <h3>Learn with your code.</h3>
-                    <p>
-                        Bring code into the conversation and ask about the
-                        specific lines, ideas, or errors you want to understand.
-                    </p>
-
-                    <div class="mini-code" aria-hidden="true">
-                        <span class="mini-code-muted"># Try to understand this</span>
-                        <br />
-                        <span class="mini-code-purple">numbers</span> = [1, 2, 3]
-                        <br />
-                        <span class="mini-code-blue">for</span> n
-                        <span class="mini-code-blue">in</span> numbers:
-                        <br />
-                        &nbsp;&nbsp;print(n)
+                    <div class="footer-column">
+                        <h3>Companiyan</h3>
+                        <a href="#about">Our vision</a>
+                        <a href="#faq">FAQs</a>
+                        <a href="#contact">Contact</a>
                     </div>
-                </article>
-
-                <article class="feature-card">
-                    <div class="feature-icon feature-icon-green">↗</div>
-                    <span class="feature-label">03 / PRACTICE</span>
-                    <h3>Build problem-solving confidence.</h3>
-                    <p>
-                        Use questions and guided reasoning to practise thinking
-                        through a problem instead of simply copying an answer.
-                    </p>
-
-                    <div class="practice-illustration" aria-hidden="true">
-                        <span class="practice-step completed">Understand the problem <b>✓</b></span>
-                        <span class="practice-step completed">Explore an approach <b>✓</b></span>
-                        <span class="practice-step current">Try it yourself <b>→</b></span>
-                    </div>
-                </article>
-
-                <article class="feature-card">
-                    <div class="feature-icon feature-icon-orange">◷</div>
-                    <span class="feature-label">04 / CONTINUE</span>
-                    <h3>Keep your learning organized.</h3>
-                    <p>
-                        Separate conversations by topic so you can return to
-                        the discussion you need when continuing your work.
-                    </p>
-
-                    <div class="topic-illustration" aria-hidden="true">
-                        <div class="topic-row"><span>✦</span> Python basics</div>
-                        <div class="topic-row"><span>✦</span> Loops and functions</div>
-                        <div class="topic-row"><span>✦</span> Problem solving</div>
-                    </div>
-                </article>
-            </div>
-
-            <p class="feature-note">
-                Features and behaviour depend on the capabilities available
-                in the current version of the app.
-            </p>
-        </section>
-
-        <!-- How it works -->
-        <section class="section how-section" id="how-it-works">
-            <div class="section-heading centered-heading">
-                <span class="eyebrow">A SIMPLE PLACE TO START</span>
-                <h2>From confusion to <span>understanding.</span></h2>
-                <p>
-                    Start with what you want to learn. Then work through it
-                    one step at a time.
-                </p>
-            </div>
-
-            <div class="journey">
-                <article class="journey-step">
-                    <div class="journey-number">01</div>
-                    <div class="journey-line"></div>
-                    <h3>Tell us what you're learning</h3>
-                    <p>
-                        Ask a question, share a goal, or explain where you
-                        are getting stuck.
-                    </p>
-                </article>
-
-                <article class="journey-step">
-                    <div class="journey-number">02</div>
-                    <div class="journey-line"></div>
-                    <h3>Explore the idea together</h3>
-                    <p>
-                        Break down the concept, examine examples, and ask
-                        follow-up questions.
-                    </p>
-                </article>
-
-                <article class="journey-step">
-                    <div class="journey-number">03</div>
-                    <div class="journey-line"></div>
-                    <h3>Try it yourself</h3>
-                    <p>
-                        Apply what you have learned and use mistakes as
-                        opportunities to improve.
-                    </p>
-                </article>
-            </div>
-
-            <div class="journey-cta">
-                <div>
-                    <h3>Ready to work on your next concept?</h3>
-                    <p>Start a conversation and take the next step.</p>
                 </div>
 
-                <a class="button button-primary" href="http://localhost:5173" data-app-link>
-                    Open Coding Companion <span aria-hidden="true">↗</span>
-                </a>
-            </div>
-        </section>
-
-        <!-- About -->
-        <section class="section about-section" id="about">
-            <div class="about-visual" aria-hidden="true">
-                <div class="about-orbit orbit-one"></div>
-                <div class="about-orbit orbit-two"></div>
-                <div class="about-core">CC</div>
-                <div class="about-chip about-chip-one">Curiosity</div>
-                <div class="about-chip about-chip-two">Practice</div>
-                <div class="about-chip about-chip-three">Understanding</div>
             </div>
 
-            <div class="about-content">
-                <span class="eyebrow">WHY CODING COMPANION?</span>
-                <h2>Because understanding matters more than memorizing.</h2>
-                <p>
-                    Learning to code can feel overwhelming when every new
-                    concept brings more questions. Coding Companion is being
-                    built to make learning more approachable through conversation,
-                    exploration, and practice.
-                </p>
-                <p>
-                    The goal is not just to help you get through today's
-                    problem. It is to help you build the understanding to
-                    approach tomorrow's problem with greater confidence.
-                </p>
-                <a class="text-link" href="help.html">
-                    Explore the Help Center <span aria-hidden="true">→</span>
-                </a>
+            <div class="container footer-bottom">
+                <p>© <span id="current-year"></span> Companiyan</p>
+                <span>Building the first product, one step at a time.</span>
             </div>
-        </section>
+        </footer>
 
-        <!-- FAQ -->
-        <section class="section faq-section" id="faq">
-            <div class="section-heading">
-                <span class="eyebrow">GOOD TO KNOW</span>
-                <h2>Frequently asked questions</h2>
-                <p>
-                    A few things to know before you get started.
-                </p>
-            </div>
 
-            <div class="faq-list">
-                <details class="faq-item">
-                    <summary>What is Coding Companion?</summary>
-                    <p>
-                        Coding Companion is an AI-powered learning product designed
-                        to help people understand coding concepts, explore code,
-                        and practise problem-solving through conversation.
-                    </p>
-                </details>
+        <script>
+            // Automatically update the copyright year.
+            const yearElement = document.getElementById("current-year");
 
-                <details class="faq-item">
-                    <summary>Who is Coding Companion for?</summary>
-                    <p>
-                        It is being built for learners who want help understanding
-                        code and developing their problem-solving skills. The
-                        experience may vary depending on the current product version.
-                    </p>
-                </details>
+            if (yearElement) {
+                yearElement.textContent = new Date().getFullYear();
+            }
 
-                <details class="faq-item">
-                    <summary>Can I ask questions about code I have written?</summary>
-                    <p>
-                        Yes. You can share relevant code using the controls available
-                        in the app and ask questions about how it works, what it
-                        means, or where you are stuck.
-                    </p>
-                </details>
+            // Feedback form submission through Formspree.
+            const feedbackForm = document.getElementById("feedback-form");
+            const feedbackSubmit = document.getElementById("feedback-submit");
+            const feedbackButtonText = document.getElementById("feedback-button-text");
+            const feedbackStatus = document.getElementById("feedback-status");
 
-                <details class="faq-item">
-                    <summary>Does Coding Companion guarantee correct answers?</summary>
-                    <p>
-                        No AI system is guaranteed to be correct every time.
-                        Review explanations, test code, and verify important
-                        information rather than relying on an answer blindly.
-                    </p>
-                </details>
+            const FORMSPREE_ENDPOINT = "https://formspree.io/f/meaagpzv";
 
-                <details class="faq-item">
-                    <summary>How can I get help using the app?</summary>
-                    <p>
-                        Visit our
-                        <a href="help.html">Help Center</a>
-                        for getting-started instructions and tutorials. You can
-                        also email
-                        <a href="mailto:prabhasuman3010@gmail.com">
-                            prabhasuman3010@gmail.com
-                        </a>.
-                    </p>
-                </details>
-            </div>
-        </section>
+            if (feedbackForm && feedbackSubmit && feedbackButtonText && feedbackStatus) {
+                feedbackForm.addEventListener("submit", async (event) => {
+                    event.preventDefault();
 
-        <!-- Final CTA -->
-        <section class="final-cta">
-            <div class="final-cta-decoration" aria-hidden="true"></div>
+                    feedbackStatus.textContent = "";
+                    feedbackStatus.className = "feedback-status";
 
-            <div class="final-cta-content">
-                <span class="eyebrow">YOUR NEXT STEP STARTS HERE</span>
-                <h2>Every expert was once a beginner.</h2>
-                <p>
-                    Bring your questions, stay curious, and keep learning.
-                </p>
+                    if (!feedbackForm.reportValidity()) {
+                        return;
+                    }
 
-                <a class="button button-light" href="http://localhost:5173" data-app-link>
-                    Start Learning <span aria-hidden="true">↗</span>
-                </a>
-            </div>
-        </section>
-    </main>
+                    const originalButtonText = feedbackButtonText.textContent;
+                    feedbackSubmit.disabled = true;
+                    feedbackButtonText.textContent = "Sending...";
 
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="footer-main">
-            <div class="footer-about">
-                <a class="brand" href="#home">
-                    <span class="brand-icon">CC</span>
-                    <span>Coding Companion</span>
-                </a>
+                    try {
+                        const response = await fetch(FORMSPREE_ENDPOINT, {
+                            method: "POST",
+                            body: new FormData(feedbackForm),
+                            headers: {
+                                Accept: "application/json"
+                            }
+                        });
 
-                <p>
-                    Helping learners understand code, build confidence,
-                    and keep moving forward.
-                </p>
-            </div>
+                        if (!response.ok) {
+                            throw new Error("Feedback submission failed.");
+                        }
 
-            <div class="footer-column">
-                <h3>Explore</h3>
-                <a href="#features">Features</a>
-                <a href="#how-it-works">How It Works</a>
-                <a href="#about">About</a>
-            </div>
+                        feedbackForm.reset();
+                        feedbackStatus.textContent =
+                            "Thank you! Your feedback has been submitted.";
+                        feedbackStatus.classList.add("success");
+                    } catch (error) {
+                        feedbackStatus.textContent =
+                            "We couldn't submit your feedback. Please try again.";
+                        feedbackStatus.classList.add("error");
+                    } finally {
+                        feedbackSubmit.disabled = false;
+                        feedbackButtonText.textContent = originalButtonText;
+                    }
+                });
+            }
+        </script>
 
-            <div class="footer-column">
-                <h3>Support</h3>
-                <a href="help.html">Help Center</a>
-                <a href="help.html#tutorials">Tutorials</a>
-                <a href="mailto:prabhasuman3010@gmail.com">Contact Us</a>
-            </div>
+        </body>
 
-            <div class="footer-column">
-                <h3>Get Started</h3>
-                <a href="http://localhost:5173" data-app-link>Open the App</a>
-                <a href="help.html#faq">FAQs</a>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <span>© <span id="current-year">2026</span> Coding Companion</span>
-            <span>Built around the idea that understanding matters.</span>
-        </div>
-    </footer>
-
-    <script>
-        // Update the copyright year automatically.
-        document.getElementById("current-year").textContent =
-            new Date().getFullYear();
-
-        // Mobile navigation.
-        const menuButton = document.getElementById("mobile-menu-button");
-        const mainNav = document.getElementById("main-nav");
-
-        menuButton.addEventListener("click", () => {
-            const isOpen = mainNav.classList.toggle("nav-open");
-            menuButton.setAttribute("aria-expanded", String(isOpen));
-        });
-
-        // Close mobile navigation after choosing a link.
-        mainNav.querySelectorAll("a").forEach((link) => {
-            link.addEventListener("click", () => {
-                mainNav.classList.remove("nav-open");
-                menuButton.setAttribute("aria-expanded", "false");
-            });
-        });
-    </script>
-</body>
-
-</html>
+        </html>
