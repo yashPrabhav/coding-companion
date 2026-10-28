@@ -1,7 +1,120 @@
 import { useEffect, useRef } from "react";
-import CodeView from "./CodeView";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
 import Composer from "./Composer";
 import Icon from "./Icons";
+
+// Hide fenced code blocks from the chat display.
+// The existing code extraction pipeline remains responsible
+// for sending generated code to Code Stream.
+function removeFencedCodeBlocks(text = "") {
+  return text
+    .replace(/```[^\n]*\n[\s\S]*?```/g, "")
+    .replace(/^\s*\n/, "")
+    .replace(/\n\s*$/, "")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+// Render readable Markdown while keeping code out of chat.
+// Code remains the responsibility of Code Stream.
+function MessageContent({ text }) {
+  const visibleText = removeFencedCodeBlocks(text);
+
+  if (!visibleText) return null;
+
+  return (
+    <div className="cc-message-content">
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+
+
+        components={{
+          pre: ({ children }) => {
+            const child = React.Children.toArray(children).find(
+              (child) => React.isValidElement(child)
+            );
+
+            if (!child) return null;
+
+            const className = child.props?.className ?? "";
+            const language = className
+              .replace("language-", "")
+              .toLowerCase();
+
+            const outputLanguages = new Set([
+              "text",
+              "output",
+              "console",
+              "terminal",
+              "plaintext",
+              "plain"
+            ]);
+
+            if (!outputLanguages.has(language)) {
+              return null;
+            }
+
+            return (
+              <pre className="cc-output-block">
+                {children}
+              </pre>
+            );
+          },
+
+          code: ({ className, children, ...props }) => {
+            if (className) {
+              const language = className
+                .replace("language-", "")
+                .toLowerCase();
+
+              const outputLanguages = new Set([
+                "text",
+                "output",
+                "console",
+                "terminal",
+                "plaintext",
+                "plain"
+              ]);
+
+              if (!outputLanguages.has(language)) {
+                return null;
+              }
+
+              return (
+                <code className="cc-output-code" {...props}>
+                  {children}
+                </code>
+              );
+            }
+
+            return (
+              <code className="cc-inline-code" {...props}>
+                {children}
+              </code>
+            );
+          },
+
+          a: ({ href, children, ...props }) => (
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              {...props}
+            >
+              {children}
+            </a>
+          ),
+        }}
+
+
+      >
+        {visibleText}
+      </ReactMarkdown>
+    </div>
+  );
+}
 
 export default function ConversationPane({
   conversation,
@@ -69,6 +182,7 @@ export default function ConversationPane({
             Start a conversation
           </button>
         </div>
+
         <Composer
           value={composer}
           onChange={setComposer}
@@ -130,9 +244,15 @@ export default function ConversationPane({
                     <div className="cc-message-label">CC</div>
                   )}
 
-                  <div className="cc-message-content">
-                    {message.text}
-                  </div>
+                  {message.role === "cc" ? (
+                    <MessageContent text={message.text} />
+                  ) : (
+                    <div className="cc-message-content">
+                      {message.role === "user" && message.code
+                        ? message.text.replace(message.code, "").trim()
+                        : message.text}
+                    </div>
+                  )}
 
                   {message.code && (
                     <div className="cc-attached-indicator">
@@ -155,7 +275,9 @@ export default function ConversationPane({
                       <i />
                     </span>
                     <span>
-                      {thinkingLong ? "Taking a little longer…" : "Thinking…"}
+                      {thinkingLong
+                        ? "Taking a little longer…"
+                        : "Thinking…"}
                     </span>
                   </div>
                 </div>
@@ -166,8 +288,12 @@ export default function ConversationPane({
               <div className="cc-inline-error">
                 <div className="cc-inline-error-copy">
                   <strong>Couldn't get a response</strong>
-                  <span>{errorMessage || "Something went wrong. Please try again."}</span>
+                  <span>
+                    {errorMessage ||
+                      "Something went wrong. Please try again."}
+                  </span>
                 </div>
+
                 {errorRetryable && (
                   <button onClick={onRetry}>
                     <Icon name="refresh" size={14} />
@@ -181,7 +307,10 @@ export default function ConversationPane({
       </div>
 
       {showJump && (
-        <button className="cc-jump-latest" onClick={scrollToLatest}>
+        <button
+          className="cc-jump-latest"
+          onClick={scrollToLatest}
+        >
           <Icon name="chevron" size={15} />
           Latest
         </button>

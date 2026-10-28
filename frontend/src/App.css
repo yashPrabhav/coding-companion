@@ -1040,3 +1040,96 @@
   outline: 2px solid var(--cc-accent, #6366f1);
   outline-offset: 3px;
 }
+
+
+.cc-message-content {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  line-height: 1.7;
+}
+
+.cc-message-content> :first-child {
+  margin-top: 0;
+}
+
+.cc-message-content> :last-child {
+  margin-bottom: 0;
+}
+
+.cc-message-content p {
+  margin: 0 0 14px;
+}
+
+.cc-message-content h1,
+.cc-message-content h2,
+.cc-message-content h3,
+.cc-message-content h4 {
+  margin: 22px 0 10px;
+  line-height: 1.35;
+  font-weight: 650;
+}
+
+.cc-message-content h1 {
+  font-size: 1.5em;
+}
+
+.cc-message-content h2 {
+  font-size: 1.3em;
+}
+
+.cc-message-content h3 {
+  font-size: 1.12em;
+}
+
+.cc-message-content ul,
+.cc-message-content ol {
+  margin: 8px 0 16px;
+  padding-left: 26px;
+}
+
+.cc-message-content li {
+  margin: 5px 0;
+  padding-left: 3px;
+}
+
+.cc-message-content li>p {
+  margin-bottom: 6px;
+}
+
+.cc-message-content strong {
+  font-weight: 700;
+}
+
+.cc-message-content blockquote {
+  margin: 14px 0;
+  padding: 4px 0 4px 14px;
+  border-left: 3px solid var(--cc-border);
+  color: var(--cc-muted);
+}
+
+.cc-message-content hr {
+  margin: 18px 0;
+  border: 0;
+  border-top: 1px solid var(--cc-border);
+}
+
+.cc-message-content table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 12px 0 18px;
+}
+
+.cc-message-content th,
+.cc-message-content td {
+  padding: 8px 10px;
+  border: 1px solid var(--cc-border);
+  text-align: left;
+}
+
+.cc-message-content a {
+  color: var(--cc-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

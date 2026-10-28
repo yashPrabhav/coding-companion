@@ -1,24 +1,49 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
+
 function extractCodeBlocks(text) {
   const codeBlocks = [];
-  const pattern = /```([a-zA-Z0-9_+#.-]*)\s*\n([\s\S]*?)```/g;
 
+  const supportedLanguages = new Set([
+    "python", "py",
+    "javascript", "js", "jsx",
+    "typescript", "ts", "tsx",
+    "java", "cpp", "c++", "c",
+    "csharp", "cs", "c#",
+    "go", "rust", "ruby", "php",
+    "swift", "kotlin", "sql",
+    "html", "css", "bash", "sh"
+  ]);
+
+  const pattern = /```([a-zA-Z0-9_+#.-]*)[ \t]*\n([\s\S]*?)```/g;
   let match;
+
   while ((match = pattern.exec(text)) !== null) {
+    const language = match[1].trim().toLowerCase();
     const code = match[2].trim();
 
-    if (code) {
-      codeBlocks.push({
-        id: `assistant-stream-${Date.now()}-${codeBlocks.length}`,
-        code,
-        language: match[1] || "text",
-        source: "assistant"
-      });
+    // Ignore unlabeled blocks and non-programming formats,
+    // such as text, output, console, and terminal.
+    if (!supportedLanguages.has(language) || !code) {
+      continue;
     }
+
+    codeBlocks.push({
+      id: `assistant-stream-${Date.now()}-${codeBlocks.length}`,
+      code,
+      language,
+      source: "assistant"
+    });
   }
 
   return codeBlocks;
+}
+
+function removeCodeBlocks(text) {
+  return text
+    .replace(/```[a-zA-Z0-9_+#.-]*\s*\n[\s\S]*?```/g, "")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
 }
 
 export function useCompanionState() {
@@ -185,6 +210,10 @@ export function useCompanionState() {
     setUndo(null);
   }
 
+  function dismissUndo() {
+    setUndo(null);
+  }
+
   async function sendMessage(isRetry = false) {
     if (isResponding) return;
 
@@ -322,12 +351,18 @@ export function useCompanionState() {
         throw error;
       }
 
+      const generatedCodeEntries = extractCodeBlocks(result.reply);
+
+      console.log("RAW AI RESPONSE:", result.reply);
+
       const assistantMessage = {
         id: `cc-${Date.now()}`,
         role: "cc",
-        text: result.reply
+        text: removeCodeBlocks(result.reply),
+        code: generatedCodeEntries.length > 0
+          ? generatedCodeEntries.map((entry) => entry.code).join("\n\n")
+          : ""
       };
-      const generatedCodeEntries = extractCodeBlocks(result.reply);
 
       setConversations((current) =>
         current.map((conversation) =>
@@ -451,6 +486,7 @@ export function useCompanionState() {
     selectConversation,
     deleteConversation,
     restoreDeletedConversation,
+    dismissUndo,
     sendMessage,
     retryMessage
   };

@@ -56,7 +56,9 @@ export default function Composer({
             disabled={
               isResponding || (!value.trim() && !attachedCode.trim())
             }
-            onClick={onSend}
+            onClick={() => {
+              onSend();
+            }}
             aria-label="Send message"
           >
             <Icon name="send" size={17} />

@@ -190,6 +190,7 @@ export default function CompanionShell() {
       <UndoToast
         visible={Boolean(state.undo)}
         onUndo={state.restoreDeletedConversation}
+        onDismiss={state.dismissUndo}
       />
     </div>
   );
