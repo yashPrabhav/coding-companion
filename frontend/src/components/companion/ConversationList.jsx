@@ -88,7 +88,7 @@ export default function ConversationList({
           className="cc-footer-action"
           onClick={() => {
             window.open(
-              "https://vercel.com/companiyan/coding-companion-help/VdS93CmXHjc41tMD4wn24cJnoKqK",
+              "https://coding-companion-help.vercel.app/",
               "_blank",
               "noopener,noreferrer"
             );

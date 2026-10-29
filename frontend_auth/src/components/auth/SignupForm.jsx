@@ -30,7 +30,7 @@ function SignupForm() {
 
 
 
-            window.location.assign("https://vercel.com/companiyan/coding-companion/t2g9aPt9didqmiDmZSRTEi3tzZsL");
+            window.location.assign("https://coding-companion.vercel.app/");
 
         } catch (error) {
             setError(error.message);
