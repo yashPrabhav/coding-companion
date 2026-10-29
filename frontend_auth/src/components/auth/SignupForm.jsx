@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { signupUser } from "../../api/auth";
-import { saveSession } from "../../auth/session";
+
 
 function SignupForm() {
     const [name, setName] = useState("");
@@ -28,9 +28,9 @@ function SignupForm() {
                 password
             );
 
-            saveSession(result.token, result.user);
 
-            console.log("Signup successful:", result.user);
+
+            window.location.assign("http://localhost:5173/");
 
         } catch (error) {
             setError(error.message);
@@ -78,6 +78,13 @@ function SignupForm() {
             >
                 {isLoading ? "Creating Account..." : "Create Account"}
             </button>
+
+            <p className="auth-privacy-link">
+                By creating an account, you acknowledge our{" "}
+                <a href="/privacy.html" target="_blank" rel="noreferrer">
+                    Privacy Notice
+                </a>.
+            </p>
 
         </form>
     );

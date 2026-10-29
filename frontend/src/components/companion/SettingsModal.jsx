@@ -1,6 +1,12 @@
 import Icon from "./Icons";
 
-export default function SettingsModal({ open, onClose }) {
+export default function SettingsModal({
+  open,
+  onClose,
+  theme,
+  onThemeChange,
+}) {
+
   if (!open) return null;
 
   return (
@@ -24,8 +30,18 @@ export default function SettingsModal({ open, onClose }) {
         </div>
 
         <div className="cc-setting-row">
-          <span>Theme</span>
-          <strong>Dark</strong>
+          <label htmlFor="cc-theme">Theme</label>
+          <select
+            id="cc-theme"
+            value={theme}
+            onChange={(event) => {
+              onThemeChange(event.target.value);
+              onClose();
+            }}
+          >
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+          </select>
         </div>
 
         <div className="cc-setting-row">

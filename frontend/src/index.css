@@ -59,6 +59,7 @@ textarea:focus-visible,
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -67,4 +68,26 @@ textarea:focus-visible,
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --cc-bg: #f7f8fa;
+  --cc-surface: #ffffff;
+  --cc-surface-2: #eef1f5;
+  --cc-surface-3: #e4e8ef;
+  --cc-border: #dce1e8;
+  --cc-border-strong: #c5ccd7;
+  --cc-text: #202631;
+  --cc-muted: #596273;
+  --cc-muted-2: #737d8d;
+  --cc-accent: #596be8;
+  --cc-accent-soft: rgba(89, 107, 232, 0.12);
+  --cc-danger: #c93636;
+}
+
+:root[data-theme="light"] body {
+  background: var(--cc-bg);
+  color: var(--cc-text);
 }

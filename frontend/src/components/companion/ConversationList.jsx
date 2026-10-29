@@ -42,9 +42,8 @@ export default function ConversationList({
         {conversations.map((conversation) => (
           <div
             key={conversation.id}
-            className={`cc-conversation-item ${
-              conversation.id === activeId ? "active" : ""
-            }`}
+            className={`cc-conversation-item ${conversation.id === activeId ? "active" : ""
+              }`}
             onClick={() => onSelect(conversation.id)}
           >
             <div className="cc-conversation-main">
@@ -85,7 +84,16 @@ export default function ConversationList({
           <Icon name="settings" size={16} />
           Settings
         </button>
-        <button className="cc-footer-action">
+        <button
+          className="cc-footer-action"
+          onClick={() => {
+            window.open(
+              "http://127.0.0.1:5500/cc_webpage/help.html",
+              "_blank",
+              "noopener,noreferrer"
+            );
+          }}
+        >
           <Icon name="help" size={16} />
           Help
         </button>

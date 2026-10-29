@@ -300,13 +300,6 @@ export function useCompanionState() {
     const controller = new AbortController();
 
     try {
-      const token = localStorage.getItem("cc_auth_token");
-      if (!token) {
-        const authError = new Error("Your session has expired. Please sign in again.");
-        authError.code = "UNAUTHORIZED";
-        authError.retryable = false;
-        throw authError;
-      }
 
       const history = [
         ...(conversationAtSend.messages || [])
@@ -322,9 +315,9 @@ export function useCompanionState() {
 
       const response = await fetch("http://localhost:3000/chat", {
         method: "POST",
+        credentials: "include",
         headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
           message: messageText,
@@ -353,7 +346,6 @@ export function useCompanionState() {
 
       const generatedCodeEntries = extractCodeBlocks(result.reply);
 
-      console.log("RAW AI RESPONSE:", result.reply);
 
       const assistantMessage = {
         id: `cc-${Date.now()}`,
@@ -385,7 +377,6 @@ export function useCompanionState() {
       pendingRequestRef.current = null;
       setErrorRetryable(false);
     } catch (error) {
-      console.error("Coding Companion chat failed:", error);
 
       let friendlyMessage = "Something went wrong while getting a response. Please try again.";
       let retryable = true;

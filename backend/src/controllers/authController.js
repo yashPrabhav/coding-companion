@@ -1,5 +1,13 @@
 const authService = require("../services/authService");
 
+const sessionCookieOptions = {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+    path: "/",
+    maxAge: 7 * 24 * 60 * 60 * 1000
+};
+
 const signup = async (req, res) => {
     try {
         const result = await authService.signup(req.body);
@@ -8,7 +16,11 @@ const signup = async (req, res) => {
             return res.status(400).json(result);
         }
 
-        return res.status(201).json(result);
+        res.cookie("cc_session", result.token, sessionCookieOptions);
+
+        const { token, ...safeResult } = result;
+
+        return res.status(201).json(safeResult);
 
     } catch (error) {
         console.error("Signup error:", error);
@@ -31,7 +43,11 @@ const login = async (req, res) => {
             return res.status(401).json(result);
         }
 
-        return res.status(200).json(result);
+        res.cookie("cc_session", result.token, sessionCookieOptions);
+
+        const { token, ...safeResult } = result;
+
+        return res.status(200).json(safeResult);
 
     } catch (error) {
         console.error("Login error:", error);

@@ -10,7 +10,7 @@ function LoginView({ onAction, onForgotPassword }) {
         <>
             <AuthHeader
                 title="Welcome Back"
-                subtitle="Continue building with AIRANK."
+                subtitle="Continue learning with Coding Companion."
             />
 
             <LoginForm

@@ -13,8 +13,16 @@ export default function CompanionShell() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [conversationsOpen, setConversationsOpen] = useState(true);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("cc-theme") || "dark"
+  );
   const [dragging, setDragging] = useState(false);
   const [leftWidth, setLeftWidth] = useState(55);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem("cc-theme", theme);
+  }, [theme]);
 
   useEffect(() => {
     function handleMove(event) {
@@ -185,6 +193,8 @@ export default function CompanionShell() {
       <SettingsModal
         open={settingsOpen}
         onClose={() => setSettingsOpen(false)}
+        theme={theme}
+        onThemeChange={setTheme}
       />
 
       <UndoToast

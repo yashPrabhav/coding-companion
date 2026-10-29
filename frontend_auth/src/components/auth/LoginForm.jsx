@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { loginUser } from "../../api/auth";
-import { saveSession } from "../../auth/session";
+
 
 function LoginForm({ onForgotPassword, actionText }) {
     const [email, setEmail] = useState("");
@@ -26,9 +26,9 @@ function LoginForm({ onForgotPassword, actionText }) {
                 password
             );
 
-            saveSession(result.token, result.user);
 
-            console.log("Login successful:", result.user);
+
+            window.location.assign("http://localhost:5173/");
 
         } catch (error) {
             setError(error.message);
