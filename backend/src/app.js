@@ -8,8 +8,8 @@ const app = express();
 
 app.use(cors({
     origin: [
-        "http://localhost:5173",
-        "http://localhost:5174"
+        "https://vercel.com/companiyan/coding-companion/t2g9aPt9didqmiDmZSRTEi3tzZsL",
+        "https://vercel.com/companiyan/coding-companion-auth/EhDCKgaSzgRpbhosKGa9Mw2o2PBR"
     ],
     credentials: true
 }));

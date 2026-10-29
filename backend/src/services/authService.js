@@ -212,7 +212,7 @@ const forgotPassword = async ({ email }) => {
 
     // 9. Create the reset link
 
-    const frontendAuthUrl = (process.env.FRONTEND_AUTH_URL || "http://localhost:5174").replace(/\/$/, "");
+    const frontendAuthUrl = (process.env.FRONTEND_AUTH_URL || "https://vercel.com/companiyan/coding-companion-auth/EhDCKgaSzgRpbhosKGa9Mw2o2PBR").replace(/\/$/, "");
     const resetLink = `${frontendAuthUrl}/reset-password?token=${resetToken}`;
 
     await sendPasswordResetEmail({
