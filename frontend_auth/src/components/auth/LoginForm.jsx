@@ -28,7 +28,7 @@ function LoginForm({ onForgotPassword, actionText }) {
 
 
 
-            window.location.assign("https://coding-companion.vercel.app/");
+            window.location.assign("https://coding-companion.vercel.app");
 
         } catch (error) {
             setError(error.message);

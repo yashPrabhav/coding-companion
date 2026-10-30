@@ -212,7 +212,7 @@ const forgotPassword = async ({ email }) => {
 
     // 9. Create the reset link
 
-    const frontendAuthUrl = (process.env.FRONTEND_AUTH_URL || "https://coding-companion-auth.vercel.app/").replace(/\/$/, "");
+    const frontendAuthUrl = (process.env.FRONTEND_AUTH_URL || "https://coding-companion-auth.vercel.app").replace(/\/$/, "");
     const resetLink = `${frontendAuthUrl}/reset-password?token=${resetToken}`;
 
     await sendPasswordResetEmail({

@@ -30,7 +30,7 @@ function SignupForm() {
 
 
 
-            window.location.assign("https://coding-companion.vercel.app/");
+            window.location.assign("https://coding-companion.vercel.app");
 
         } catch (error) {
             setError(error.message);
@@ -79,12 +79,13 @@ function SignupForm() {
                 {isLoading ? "Creating Account..." : "Create Account"}
             </button>
 
-            <p className="auth-privacy-link">
-                By creating an account, you acknowledge our{" "}
-                <a href="/privacy/privacy.html" target="_blank" rel="noreferrer">
-                    Privacy Notice
-                </a>.
-            </p>
+            <a
+                href="https://coding-companion-privacy.vercel.app/privacy.html"
+                target="_blank"
+                rel="noreferrer"
+            >
+                Privacy Notice
+            </a>
 
         </form>
     );

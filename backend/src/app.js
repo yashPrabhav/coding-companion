@@ -8,8 +8,8 @@ const app = express();
 
 app.use(cors({
     origin: [
-        "https://coding-companion.vercel.app/",
-        "https://coding-companion-auth.vercel.app/"
+        "https://coding-companion.vercel.app",
+        "https://coding-companion-auth.vercel.app"
     ],
     credentials: true
 }));
