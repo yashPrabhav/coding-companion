@@ -81,7 +81,7 @@ function SignupForm() {
 
             <p className="auth-privacy-link">
                 By creating an account, you acknowledge our{" "}
-                <a href="/privacy.html" target="_blank" rel="noreferrer">
+                <a href="/privacy/privacy.html" target="_blank" rel="noreferrer">
                     Privacy Notice
                 </a>.
             </p>
