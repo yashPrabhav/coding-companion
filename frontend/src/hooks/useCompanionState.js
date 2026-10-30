@@ -313,7 +313,7 @@ export function useCompanionState() {
 
       requestTimeout = setTimeout(() => controller.abort(), 45000);
 
-      const response = await fetch("https://coding-companion-5b9t.onrender.com", {
+      const response = await fetch("https://coding-companion-5b9t.onrender.com/chat", {
         method: "POST",
         credentials: "include",
         headers: {
